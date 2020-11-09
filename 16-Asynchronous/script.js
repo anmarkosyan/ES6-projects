@@ -132,9 +132,20 @@ setTimeout(() => {
 
 // #2 solution
 const getCountryData = function (country) {
+  //country 1
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(response => response.json())
-    .then(data => renderCountry(data[0]));
+    .then(data => {
+      renderCountry(data[0]);
+
+      //country 2
+      const neighbour = data[0].borders[0];
+      if (!neighbour) return;
+
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'));
 };
 
 getCountryData('armenia');
