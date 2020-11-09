@@ -137,10 +137,60 @@ setTimeout(() => {
 // };
 
 // #2 solution
+//create helper function
+const getJSON = function (url, errorMsg = 'Something went wrong!') {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(`${errorMsg} (${response.status})`);
+    }
+
+    return response.json();
+  });
+};
+//main function #1 without using helper function
+// const getCountryData = function (country) {
+//   //country 1
+//   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`Country not found (${response.status})`);
+//       }
+//
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//
+//       //country 2
+//       const neighbour = data[0].borders[0];
+//       if (!neighbour) return;
+//
+//       return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+//     })
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`Country not found (${response.status})`);
+//       }
+//
+//       return response.json();
+//     })
+//     .then(data => renderCountry(data, 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err} 💥💥💥`);
+//       renderError(`Something went wrong 💥💥💥 ${err.message} : Try again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = '1';
+//     });
+// };
+
+//#2: With helper function
 const getCountryData = function (country) {
   //country 1
-  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then(response => response.json())
+  getJSON(
+    `https://restcountries.eu/rest/v2/name/${country}`,
+    'Country not found!'
+  )
     .then(data => {
       renderCountry(data[0]);
 
@@ -148,9 +198,11 @@ const getCountryData = function (country) {
       const neighbour = data[0].borders[0];
       if (!neighbour) return;
 
-      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+      return getJSON(
+        `https://restcountries.eu/rest/v2/alpha/${neighbour}`,
+        'Country not found!'
+      );
     })
-    .then(response => response.json())
     .then(data => renderCountry(data, 'neighbour'))
     .catch(err => {
       console.error(`${err} 💥💥💥`);
@@ -164,3 +216,4 @@ const getCountryData = function (country) {
 btn.addEventListener('click', function () {
   getCountryData('armenia');
 });
+//getCountryData('werrtyyu')
