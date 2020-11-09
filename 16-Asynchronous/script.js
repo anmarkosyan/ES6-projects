@@ -196,7 +196,7 @@ const getCountryData = function (country) {
 
       //country 2
       const neighbour = data[0].borders[0];
-      if (!neighbour) return;
+      if (!neighbour) throw new Error('No neighbour found!');
 
       return getJSON(
         `https://restcountries.eu/rest/v2/alpha/${neighbour}`,
@@ -214,6 +214,6 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('armenia');
+  getCountryData('australia');
 });
 //getCountryData('werrtyyu')
