@@ -114,7 +114,10 @@ setTimeout(() => {
 // request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
 // request.send()
 
-//now #1
+//now
+//const request = fetch('https://restcountries.eu/rest/v2/name/armenia')
+
+// #1 solution
 // const getCountryData = function (country) {
 //   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
 //     .then(function (response) {
@@ -127,7 +130,7 @@ setTimeout(() => {
 //     });
 // };
 
-//now #2
+// #2 solution
 const getCountryData = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(response => response.json())
