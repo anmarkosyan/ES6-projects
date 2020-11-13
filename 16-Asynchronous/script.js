@@ -271,13 +271,24 @@ GOOD LUCK 😀
 // whereAmI(19.037, 72.873); //You are in Mumbai, India
 // whereAmI(-33.933, 18.474); //You are in Cape Town, South Africa
 
-//order of execution
-console.log('test start'); //1
-setTimeout(() => console.log('0 sec  timer'), 0); //5 => not after 0 second, but after second promise is executed
-Promise.resolve('Resolved promise 1').then(res => console.log(res)); //3
+//=================================== order of execution =====================================
+// console.log('test start'); //1
+// setTimeout(() => console.log('0 sec  timer'), 0); //5 => not after 0 second, but after second promise is executed
+// Promise.resolve('Resolved promise 1').then(res => console.log(res)); //3
+//
+// Promise.resolve('Resolved promise 2').then(res => {
+//   for (let i = 0; i < 100000000; i++) {}
+//   console.log(res);//4
+// });
+// console.log('test end'); //2
 
-Promise.resolve('Resolved promise 2').then(res => {
-  for (let i = 0; i < 100000000; i++) {}
-  console.log(res);//4
+//=================
+const lotteryPromise = new Promise(function (resolve, reject) {
+  if (Math.random() >= 0.5) {
+    resolve('You WIN 🏆');
+  } else {
+    reject('You lost your money 💩');
+  }
 });
-console.log('test end'); //2
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
