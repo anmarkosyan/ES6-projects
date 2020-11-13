@@ -282,7 +282,7 @@ GOOD LUCK 😀
 // });
 // console.log('test end'); //2
 
-//=================
+//======================= Creating  our own promises ======================================
 const lotteryPromise = new Promise(function (resolve, reject) {
   if (Math.random() >= 0.5) {
     resolve('You WIN 🏆');
