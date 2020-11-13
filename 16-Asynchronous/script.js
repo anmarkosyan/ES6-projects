@@ -277,7 +277,7 @@ setTimeout(() => console.log('0 sec  timer'), 0); //5 => not after 0 second, but
 Promise.resolve('Resolved promise 1').then(res => console.log(res)); //3
 
 Promise.resolve('Resolved promise 2').then(res => {
-  for (let i = 0; i < 100000; i++) {}
+  for (let i = 0; i < 100000000; i++) {}
   console.log(res);//4
 });
 console.log('test end'); //2
