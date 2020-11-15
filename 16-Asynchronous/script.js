@@ -335,3 +335,8 @@ wait(1)
 //     }, 1000);
 //   }, 1000);
 // }, 1000);
+
+//========================= a way to very easy create a fulfilled or a rejected promise immediately
+//and this is a static method of a promise constructor , which will resolve immediately
+Promise.resolve('abc').then(response => console.log(response));
+Promise.reject(new Error('efg')).catch(err => console.error(err));
