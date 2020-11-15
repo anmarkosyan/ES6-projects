@@ -303,11 +303,35 @@ const wait = function (second) {
     setTimeout(resolve, second * 1000);
   });
 };
-
-wait(2)
+//======new way of doing
+wait(1)
   .then(() => {
-    console.log('I waited for 2 second');
+    console.log('1 second passed');
     return wait(1);
-  })
-  .then(() => console.log('I waited for 1 second'));
+  }).then(() => {
+  console.log('2 second passed');
+  return wait(1);
+}).then(() => {
+  console.log('3 second passed');
+  return wait(1);
+}).then(() => {
+  console.log('4 second passed');
+  return wait(1);
+})
+
+//=============== old way of doing ===============
+// setTimeout(() => {
+//   console.log('1 second passed');
+//   setTimeout(() => {
+//     console.log('2 seconds passed');
+//     setTimeout(() => {
+//       console.log('3 seconds passed');
+//       setTimeout(() => {
+//         console.log('4 seconds passed')
+//       }, 1000)
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+
 
