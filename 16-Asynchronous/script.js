@@ -296,3 +296,18 @@ const lotteryPromise = new Promise(function (resolve, reject) {
 });
 
 lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+//how to promisify setTimeout function
+const wait = function (second) {
+  return new Promise(resolve => {
+    setTimeout(resolve, second * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log('I waited for 2 second');
+    return wait(1);
+  })
+  .then(() => console.log('I waited for 1 second'));
+
