@@ -308,16 +308,19 @@ wait(1)
   .then(() => {
     console.log('1 second passed');
     return wait(1);
-  }).then(() => {
-  console.log('2 second passed');
-  return wait(1);
-}).then(() => {
-  console.log('3 second passed');
-  return wait(1);
-}).then(() => {
-  console.log('4 second passed');
-  return wait(1);
-})
+  })
+  .then(() => {
+    console.log('2 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('3 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('4 second passed');
+    return wait(1);
+  });
 
 //=============== old way of doing ===============
 // setTimeout(() => {
@@ -332,6 +335,3 @@ wait(1)
 //     }, 1000);
 //   }, 1000);
 // }, 1000);
-
-
-
