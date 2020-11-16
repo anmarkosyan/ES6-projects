@@ -421,6 +421,8 @@ TEST DATA: Images in the img folder. Test the error handler by passing a wrong i
 Set the network speed to 'Fast 3G' in the dev tools Network tab, otherwise images load too fast.
 GOOD LUCK 😀
 */
+
+/*
 const imgContainer = document.querySelector('.images');
 
 const wait = function (second) {
@@ -466,3 +468,19 @@ createImage('img/img-1.jpeg')
     currentImg.style.display = 'none';
   })
   .catch(err => console.error(err));
+ */
+
+//====================== 2017 Async/Await ==========================================
+//here is better and easier way to consume promises
+
+const whereAmI = async function (country) {
+  //old way
+  // fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+  // .then(res => console.log(res));
+
+  //new way
+  const res = await fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+  console.log(res);
+};
+whereAmI('armenia');
+console.log('First');
