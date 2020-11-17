@@ -594,3 +594,25 @@ get3Countries('armenia', 'canada', 'france');
   ]);
   console.log(res[0]);
 })();
+
+//****** another example
+//For example, if your user has a very bad internet connection,
+//then a fetch requests in your application might take way too long to actually be useful.
+//And so we can create a special time out promise,
+//which automatically rejects after a certain time has passed.
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long!`));
+    }, sec * 1000);
+  });
+};
+
+//doing AJAX call
+Promise.race([
+  getJSON(`https://restcountries.eu/rest/v2/name/tanzania`),
+  timeout(5),
+])
+  .then(data => console.log(data[0]))
+  .catch(err => console.error(err));
