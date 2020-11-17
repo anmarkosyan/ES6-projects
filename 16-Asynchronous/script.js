@@ -139,15 +139,15 @@ setTimeout(() => {
 
 // #2 solution
 //create helper function
-// const getJSON = function (url, errorMsg = 'Something went wrong!') {
-//   return fetch(url).then(response => {
-//     if (!response.ok) {
-//       throw new Error(`${errorMsg} (${response.status})`);
-//     }
-//
-//     return response.json();
-//   });
-// };
+const getJSON = function (url, errorMsg = 'Something went wrong!') {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(`${errorMsg} (${response.status})`);
+    }
+
+    return response.json();
+  });
+};
 //main function #1 without using helper function
 // const getCountryData = function (country) {
 //   //country 1
@@ -472,7 +472,7 @@ createImage('img/img-1.jpeg')
 
 //====================== 2017 Async/Await ==========================================
 //here is better and easier way to consume promises
-
+/*
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -531,13 +531,50 @@ console.log('1: will get location');
 
 //how convert old way of promises to async/await
 //we can use IIFE:immediately-invoked function expressions
-(async function (){
-try {
- const city =  await whereAmI();
- console.log(`2: ${city}`)
-} catch (err){
-  console.error(`2: ${err.message} 💥`)
-}
-  console.log('3: Finished getting location')
-
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message} 💥`);
+  }
+  console.log('3: Finished getting location');
 })();
+
+ */
+
+//============= Running promises PARALLEL ========================
+//In this section we want to get data about 3 countries at the same time.
+//but order does not matter. we should use async function
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    //in this way it doesnt loaded in the same time, each Ajax call wait until before ended
+    // const [data1] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c1}`
+    // );
+    // const [data2] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c2}`
+    // );
+    // const [data3] = await getJSON(
+    //   `https://restcountries.eu/rest/v2/name/${c3}`
+    // );
+    // console.log([data1.capital, data2.capital, data3.capital]);
+
+    //‼️ this will return a new promise, and will loaded at the same time: parallel
+    //and Promise.all() function called combinator function, because it allows us to combine multiply promises
+    //❗️but if one of the promises reject,then the whole promises reject as well
+   const data = await Promise.all([
+      getJSON(`https://restcountries.eu/rest/v2/name/${c1}`),
+      getJSON(`https://restcountries.eu/rest/v2/name/${c2}`),
+      getJSON(`https://restcountries.eu/rest/v2/name/${c3}`),
+    ]);
+
+   console.log(data.map(el => el[0].capital))
+
+
+  } catch (err) {
+    console.error(`${err.message}`);
+  }
+};
+get3Countries('armenia', 'canada', 'france');
