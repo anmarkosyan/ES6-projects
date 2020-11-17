@@ -546,7 +546,7 @@ console.log('1: will get location');
 //============= Running promises PARALLEL ========================
 //In this section we want to get data about 3 countries at the same time.
 //but order does not matter. we should use async function
-
+/*
 const get3Countries = async function (c1, c2, c3) {
   try {
     //in this way it doesnt loaded in the same time, each Ajax call wait until before ended
@@ -560,7 +560,7 @@ const get3Countries = async function (c1, c2, c3) {
     //   `https://restcountries.eu/rest/v2/name/${c3}`
     // );
     // console.log([data1.capital, data2.capital, data3.capital]);
-
+    //============== Promise.all() ===========
     //‼️ this will return a new promise, and will loaded at the same time: parallel
     //and Promise.all() function called combinator function, because it allows us to combine multiply promises
     //❗️but if one of the promises reject,then the whole promises reject as well
@@ -578,3 +578,19 @@ const get3Countries = async function (c1, c2, c3) {
   }
 };
 get3Countries('armenia', 'canada', 'france');
+*/
+
+//========== Promise.race() =========
+//another combinator function , and promise returned by this function settled as soon as one of the input promises settles.
+//And remember that settled simply means,that a value is available,
+//❗️but it doesn't matter if the promise got rejected or fulfilled.
+//And so in Promise.race(), basically the first settled promise wins the race.
+
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.eu/rest/v2/name/armenia`),
+    getJSON(`https://restcountries.eu/rest/v2/name/russia`),
+    getJSON(`https://restcountries.eu/rest/v2/name/france`),
+  ]);
+  console.log(res[0]);
+})();
