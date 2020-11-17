@@ -617,7 +617,7 @@ Promise.race([
   .then(data => console.log(data[0]))
   .catch(err => console.error(err));
 
-//=========== Promise.allSettled() ==========
+//=========== Promise.allSettled(): ES2020 ==========
 //it's like Promise.all();work with all promises, and return all promises, no matter reject or not
 
 Promise.allSettled([
@@ -628,6 +628,17 @@ Promise.allSettled([
 
 //with Promise.all(): if there is an one error, it will return error for all promises
 Promise.all([
+  Promise.resolve('Success'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+//============ Promise.any() : ES2021 ========
+//it's very similar with Promise.race(), but ignore rejected Promises, so always return first settled fulfilled promise
+
+Promise.any([
   Promise.resolve('Success'),
   Promise.reject('Error'),
   Promise.resolve('Another Success'),
