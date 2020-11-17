@@ -1,6 +1,6 @@
 'use strict';
 
-const btn = document.querySelector('.btn-country');
+//const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 const renderCountry = function (data, className = '') {
@@ -473,16 +473,29 @@ createImage('img/img-1.jpeg')
 //====================== 2017 Async/Await ==========================================
 //here is better and easier way to consume promises
 
-const whereAmI = async function (country) {
-  //old way
-  // fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-  // .then(res => console.log(res));
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
 
-  //new way
-  const res = await fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+//old way
+//return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`).then(res => console.log(res));
+
+const whereAmI = async function () {
+  //geolocation
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+  //reverse geocoding
+  const resGeo = await  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+
+  //country data
+  const res = await fetch(`https://restcountries.eu/rest/v2/name/${dataGeo.country}`);
   const data = await res.json();
   console.log(data);
   renderCountry(data[0]);
 };
-whereAmI('armenia');
+whereAmI();
 console.log('First');
