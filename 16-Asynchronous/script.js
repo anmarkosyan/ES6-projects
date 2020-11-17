@@ -543,7 +543,7 @@ console.log('1: will get location');
 
  */
 
-//============= Running promises PARALLEL ========================
+//============= Running promises PARALLEL: COMBINATOR FUNCTIONS ========================
 //In this section we want to get data about 3 countries at the same time.
 //but order does not matter. we should use async function
 /*
@@ -615,4 +615,22 @@ Promise.race([
   timeout(5),
 ])
   .then(data => console.log(data[0]))
+  .catch(err => console.error(err));
+
+//=========== Promise.allSettled() ==========
+//it's like Promise.all();work with all promises, and return all promises, no matter reject or not
+
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Success'),
+]).then(res => console.log(res));
+
+//with Promise.all(): if there is an one error, it will return error for all promises
+Promise.all([
+  Promise.resolve('Success'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Success'),
+])
+  .then(res => console.log(res))
   .catch(err => console.error(err));
