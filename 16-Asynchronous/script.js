@@ -479,7 +479,6 @@ const getPosition = function () {
   });
 };
 
-
 //how to catch errors with async/await
 // try {
 //   let y = 3;
@@ -524,9 +523,21 @@ const whereAmI = async function () {
 };
 
 console.log('1: will get location');
-whereAmI()
-  .then(city => console.log(`2: ${city}`))
-  .catch(err => console.error(`2: ${err.message} 💥`))
-  .finally(() => console.log('3: Finished getting location'));
+//old way
+// whereAmI()
+//   .then(city => console.log(`2: ${city}`))
+//   .catch(err => console.error(`2: ${err.message} 💥`))
+//   .finally(() => console.log('3: Finished getting location'));
 
+//how convert old way of promises to async/await
+//we can use IIFE:immediately-invoked function expressions
+(async function (){
+try {
+ const city =  await whereAmI();
+ console.log(`2: ${city}`)
+} catch (err){
+  console.error(`2: ${err.message} 💥`)
+}
+  console.log('3: Finished getting location')
 
+})();
