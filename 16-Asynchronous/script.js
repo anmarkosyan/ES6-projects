@@ -25,10 +25,10 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = '1';
 };
 
-// const renderError = function (msg) {
-//   countriesContainer.insertAdjacentText('beforeend', msg);
-//   //countriesContainer.style.opacity = '1';
-// };
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = '1';
+};
 
 //=============== First AJAX Call: XMLHttpRequest ==================
 // const getCountryData = function (country) {
@@ -483,19 +483,44 @@ const getPosition = function () {
 //return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`).then(res => console.log(res));
 
 const whereAmI = async function () {
-  //geolocation
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
-  //reverse geocoding
-  const resGeo = await  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+  //using try for catch errors
+  try {
+    //geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    //reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) {
+      throw new Error('problem getting location data');
+    }
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
 
-  //country data
-  const res = await fetch(`https://restcountries.eu/rest/v2/name/${dataGeo.country}`);
-  const data = await res.json();
-  console.log(data);
-  renderCountry(data[0]);
+    //country data
+    const res = await fetch(
+      `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`💥 ${err.message}`);
+  }
 };
 whereAmI();
+whereAmI();
+whereAmI();
 console.log('First');
+
+//==============================how to catch errors with async/await
+
+// try {
+//   let y = 3;
+//   const x = 4;
+//   x = 5;
+// } catch (err)  {
+//   alert(err.message)
+// }
