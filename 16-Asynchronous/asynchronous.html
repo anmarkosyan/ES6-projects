@@ -103,19 +103,32 @@
       };
 
       //consume the promise
-      getIds
-        .then(IDs => {
-          console.log(IDs);
-          return getRecipe(IDs[2]);
-        })
-        .then(recipe => {
-          console.log(recipe);
-          return getRelater('Anush');
-        })
-        .then(recipe => {
-          console.log(recipe);
-        })
-        .catch(err => console.error(err));
+      // getIds
+      //   .then(IDs => {
+      //     console.log(IDs);
+      //     return getRecipe(IDs[2]);
+      //   })
+      //   .then(recipe => {
+      //     console.log(recipe);
+      //     return getRelater('Anush');
+      //   })
+      //   .then(recipe => {
+      //     console.log(recipe);
+      //   })
+      //   .catch(err => console.error(err));
+
+      //================= Async/Await: for easy consuming promises  ==================
+      async function getRecipesAW() {
+        const IDs = await getIds;
+        console.log(IDs);
+
+        const recipe = await getRecipe(IDs[2]);
+        console.log(recipe);
+
+        const publisher = await getRelater('Anush');
+        console.log(publisher);
+      }
+      getRecipesAW();
     </script>
   </body>
 </html>
