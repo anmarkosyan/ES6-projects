@@ -35,36 +35,87 @@
       // };
       // first();
 
-      //============ AJAX call with Callback Hell ========
-      //fake recipe
-      function getRecipe() {
-        //1. we get a bunch of recipe IDs from a server
-        //2. And then based on that, we select a recipe
-        //3.then get that recipe from a server after that.
-        setTimeout(() => {
-          const recipeId = [534, 456, 123, 56, 7];
-          console.log(recipeId);
+      //============  Callback Hell ========
+      //fake AJAX call
+      // function getRecipe() {
+      //   //1. we get a bunch of recipe IDs from a server
+      //   //2. And then based on that, we select a recipe
+      //   //3.then get that recipe from a server after that.
+      //   setTimeout(() => {
+      //     const recipeId = [534, 456, 123, 56, 7];
+      //     console.log(recipeId);
+      //
+      //     setTimeout(
+      //       id => {
+      //         const recipe = { title: 'cake', publisher: 'Anush' };
+      //         console.log(`${id}: ${recipe.title}`);
+      //
+      //         setTimeout(
+      //           publisherRec => {
+      //             const recipe2 = { title: 'Pizza', publisher: 'Anush' };
+      //             console.log(recipe2);
+      //           },
+      //           1500,
+      //           recipe.publisher
+      //         );
+      //       },
+      //       1000,
+      //       recipeId[2]
+      //     );
+      //   }, 1500);
+      // }
+      // getRecipe();
 
+      //============ Promises ===================
+      //convert callback hell to promises
+
+      //produced Promises
+      const getIds = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([534, 456, 123, 56, 7]);
+        }, 1500);
+      });
+
+      const getRecipe = recId => {
+        return new Promise((resolve, reject) => {
           setTimeout(
             id => {
               const recipe = { title: 'cake', publisher: 'Anush' };
-              console.log(`${id}: ${recipe.title}`);
-
-              setTimeout(
-                publisherRec => {
-                  const recipe2 = { title: 'Pizza', publisher: 'Anush' };
-                  console.log(recipe2);
-                },
-                1500,
-                recipe.publisher
-              );
+              resolve(`${id}: ${recipe.title}`);
             },
-            1000,
-            recipeId[2]
+            1500,
+            recId
           );
-        }, 1500);
-      }
-      getRecipe();
+        });
+      };
+
+      const getRelater = publisher => {
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            pub => {
+              const recipe = { title: 'Pizza', publisher: 'Anush' };
+              resolve(`${pub}: ${recipe.title}`);
+            },
+            1500,
+            publisher
+          );
+        });
+      };
+
+      //consume the promise
+      getIds
+        .then(IDs => {
+          console.log(IDs);
+          return getRecipe(IDs[2]);
+        })
+        .then(recipe => {
+          console.log(recipe);
+          return getRelater('Anush');
+        })
+        .then(recipe => {
+          console.log(recipe);
+        })
+        .catch(err => console.error(err));
     </script>
   </body>
 </html>
