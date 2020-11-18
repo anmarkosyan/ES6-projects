@@ -22,18 +22,49 @@
       // first();
 
       //asynchronous JS
-      const second = () => {
-        setTimeout(() => {
-          console.log('Async hello');
-        }, 2000)
-      };
+      // const second = () => {
+      //   setTimeout(() => {
+      //     console.log('Async hello');
+      //   }, 2000)
+      // };
+      //
+      // const first = () => {
+      //   console.log('First'); //1
+      //   second(); //3
+      //   console.log('The end');//2
+      // };
+      // first();
 
-      const first = () => {
-        console.log('First'); //1
-        second(); //3
-        console.log('The end');//2
-      };
-      first();
+      //============ AJAX call with Callback Hell ========
+      //fake recipe
+      function getRecipe() {
+        //1. we get a bunch of recipe IDs from a server
+        //2. And then based on that, we select a recipe
+        //3.then get that recipe from a server after that.
+        setTimeout(() => {
+          const recipeId = [534, 456, 123, 56, 7];
+          console.log(recipeId);
+
+          setTimeout(
+            id => {
+              const recipe = { title: 'cake', publisher: 'Anush' };
+              console.log(`${id}: ${recipe.title}`);
+
+              setTimeout(
+                publisherRec => {
+                  const recipe2 = { title: 'Pizza', publisher: 'Anush' };
+                  console.log(recipe2);
+                },
+                1500,
+                recipe.publisher
+              );
+            },
+            1000,
+            recipeId[2]
+          );
+        }, 1500);
+      }
+      getRecipe();
     </script>
   </body>
 </html>
