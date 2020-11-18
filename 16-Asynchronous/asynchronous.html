@@ -127,8 +127,17 @@
 
         const publisher = await getRelater('Anush');
         console.log(publisher);
+
+        return recipe;
       }
-      getRecipesAW();
+      //getRecipesAW();
+      //if we want to get a return value
+      // const get = getRecipesAW();
+      // console.log(get);//Promise{<pending>} => will not to work
+
+      getRecipesAW()
+        .then(res => console.log(`${res} is the best 🍰`))
+        .catch(err => console.error(err));
     </script>
   </body>
 </html>
