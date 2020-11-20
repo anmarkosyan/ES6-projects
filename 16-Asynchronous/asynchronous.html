@@ -148,19 +148,40 @@
           `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
         ) //fetch always returns a promise
           .then(res => {
-            console.log(res);
+            //console.log(res);
             return res.json(); // json also returns a promise so we handle that by chaining
           })
           .then(data => {
             const today = data.consolidated_weather[0];
             console.log(
-              `Temperature in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
+              `Temperature today in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
             );
           })
           .catch(err => console.error(err.message));
       }
       getWeather(2487956);
       getWeather(44418);
+
+      //fetch  consuming with Async/Await
+
+      async function getWeatherAW(woeid) {
+        try {
+          const result = await fetch(
+            `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
+          );
+          const data = await result.json();
+          //console.log(data);
+          const tomorrow = await data.consolidated_weather[1];
+          console.log(
+            `Temperature tomorrow in ${data.title} stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}.`
+          );
+          return data;
+        } catch (err) {
+          console.error(err.message);
+        }
+      }
+      getWeatherAW(2487956);
+      getWeatherAW(44418).then(res => console.log(res));
     </script>
   </body>
 </html>
