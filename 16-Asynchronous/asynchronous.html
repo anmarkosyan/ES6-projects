@@ -70,6 +70,7 @@
       //convert callback hell to promises
 
       //produced Promises
+      /*
       const getIds = new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([534, 456, 123, 56, 7]);
@@ -138,6 +139,28 @@
       getRecipesAW()
         .then(res => console.log(`${res} is the best 🍰`))
         .catch(err => console.error(err));
+
+       */
+
+      //=============== AJAX call with using fetch API function ===========
+      function getWeather(woeid) {
+        fetch(
+          `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`
+        ) //fetch always returns a promise
+          .then(res => {
+            console.log(res);
+            return res.json(); // json also returns a promise so we handle that by chaining
+          })
+          .then(data => {
+            const today = data.consolidated_weather[0];
+            console.log(
+              `Temperature in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
+            );
+          })
+          .catch(err => console.error(err.message));
+      }
+      getWeather(2487956);
+      getWeather(44418);
     </script>
   </body>
 </html>
