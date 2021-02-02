@@ -150,6 +150,7 @@ console.log(total);
  */
 
 //========== ✏️ Objects ==============
+/*
 //const friends = ['Anu', 20 + 12, ["Aram", "Ara"]];
 const aboutMe = {
   firstName: "Anush",
@@ -181,3 +182,55 @@ console.log(aboutMe);
 
 //'Anush has 3 friends, and her best friend is called Aram'
 console.log(`${aboutMe.firstName} has ${aboutMe.friends.length} friends, and her best friend is called ${aboutMe.friends[0]}.`)
+
+*/
+const aboutMe = {
+  firstName: "Anush",
+  birthYear: 1986,
+  friends: ["Aram", "Ara", "Araqs"],
+  job: "developer",
+  hasDriversLicense: true,
+  //1️⃣ use only function expression
+  // calcAge: function (birthYear) {
+  //   return 2021 - birthYear;
+  // },
+
+  //2️⃣ using THIS keyword which equal to aboutMe
+  // calcAge: function () {
+  //   //console.log(this);//like aboutMe
+  //   return 2021 - this.birthYear;
+  // },
+
+  //3️⃣ create new property using THIS keyword
+  calcAge: function () {
+    this.age = 2021 - this.birthYear;
+    return this.age;
+  },
+
+  describeMe: function () {
+    this.me = `${this.firstName} is a ${this.calcAge()} years old ${
+      this.job
+    }, and she has ${this.hasDriversLicense ? "a" : "no"} driver's license.`;
+    return this.me;
+  },
+};
+
+//❗️this can be very heavy for program
+// console.log(aboutMe.calcAge());
+// console.log(aboutMe.calcAge());
+// console.log(aboutMe.calcAge());
+// console.log(aboutMe.calcAge());
+// console.log(aboutMe.calcAge());
+
+// 👍 just calculate for once, and after use property for call function
+// console.log(aboutMe.calcAge());
+// console.log(aboutMe.age);
+// console.log(aboutMe.age);
+// console.log(aboutMe.age);
+
+//========== 👩🏻‍💻 coding challenge ==========
+//'Anush is a 35 years old  developer, and she has a/no driver's license'
+console.log(aboutMe.describeMe());
+console.log(aboutMe.me);
+console.log(aboutMe.me);
+console.log(aboutMe.me);
