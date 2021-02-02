@@ -98,7 +98,7 @@ const calcAverage = (a, b, c) => Math.round((a + b + c) / 3);
 //test 1
 let score1 = calcAverage(44, 23, 71);
 let score2 = calcAverage(65, 54, 49);
-console.log(score1, score2)
+console.log(score1, score2);
 
 const checkWinner = (avg1, avg2) => {
   if (avg1 >= avg2 * 2) {
@@ -116,3 +116,33 @@ checkWinner(score1, score2);
 score1 = calcAverage(34, 47, 20);
 score2 = calcAverage(10, 23, 11);
 checkWinner(score1, score2);
+
+//=========== ✏️ Arrays ================
+
+//📍
+const firstName = "Anu";
+const friends = [firstName, 20 + 12, "Aram", "Ara"];
+console.log(friends); //["Anu", 32, "Aram", "Ara"]
+
+//📍
+const calcAge = (birthYear) => {
+  return 2021 - birthYear;
+};
+
+const years = [2012, 2000, 2018, 2020, 1986];
+
+const ages1 = [calcAge(years[0]), calcAge(years[1]), calcAge(years[2])];
+const ages2 = years.map((el) => calcAge(el));
+
+console.log(ages1, ages2); //[9, 21, 3, 1, 35]
+
+//============ 👩🏻‍💻 Coding challenge =========
+//create a calcTip function
+const calcTip = (bill) =>
+  bill >= 50 && bill <= 300 ? (bill * 15) / 100 : (bill * 20) / 100;
+
+const bill = [125, 555, 44];
+const tip = bill.map(el => calcTip(el));
+const total = [bill[0] + tip[0], bill[1] + tip[1], bill[2] + tip[2]];
+
+console.log(total);
