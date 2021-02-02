@@ -93,32 +93,32 @@ if (hasDriversLicense) console.log("I can drive))");
 // console.log(yearsUntilRetirement(1945, "Armen"));
 
 //========= ✏️ code challenge #2 ==================
-const calcAverage = (a, b, c) => Math.round((a + b + c) / 3);
-
-//test 1
-let score1 = calcAverage(44, 23, 71);
-let score2 = calcAverage(65, 54, 49);
-console.log(score1, score2);
-
-const checkWinner = (avg1, avg2) => {
-  if (avg1 >= avg2 * 2) {
-    console.log(`Win score N.1 ${avg1}`);
-  } else if (avg2 >= avg1 * 2) {
-    console.log(`Win score N.2 ${avg1}`);
-  } else {
-    console.log("No team wins...");
-  }
-};
-
-checkWinner(score1, score2);
-
-//test 2
-score1 = calcAverage(34, 47, 20);
-score2 = calcAverage(10, 23, 11);
-checkWinner(score1, score2);
+// const calcAverage = (a, b, c) => Math.round((a + b + c) / 3);
+//
+// //test 1
+// let score1 = calcAverage(44, 23, 71);
+// let score2 = calcAverage(65, 54, 49);
+// console.log(score1, score2);
+//
+// const checkWinner = (avg1, avg2) => {
+//   if (avg1 >= avg2 * 2) {
+//     console.log(`Win score N.1 ${avg1}`);
+//   } else if (avg2 >= avg1 * 2) {
+//     console.log(`Win score N.2 ${avg1}`);
+//   } else {
+//     console.log("No team wins...");
+//   }
+// };
+//
+// checkWinner(score1, score2);
+//
+// //test 2
+// score1 = calcAverage(34, 47, 20);
+// score2 = calcAverage(10, 23, 11);
+// checkWinner(score1, score2);
 
 //=========== ✏️ Arrays ================
-
+/*
 //📍
 const firstName = "Anu";
 const friends = [firstName, 20 + 12, "Aram", "Ara"];
@@ -142,7 +142,42 @@ const calcTip = (bill) =>
   bill >= 50 && bill <= 300 ? (bill * 15) / 100 : (bill * 20) / 100;
 
 const bill = [125, 555, 44];
-const tip = bill.map(el => calcTip(el));
+const tip = bill.map((el) => calcTip(el));
 const total = [bill[0] + tip[0], bill[1] + tip[1], bill[2] + tip[2]];
 
 console.log(total);
+
+ */
+
+//========== ✏️ Objects ==============
+//const friends = ['Anu', 20 + 12, ["Aram", "Ara"]];
+const aboutMe = {
+  firstName: "Anush",
+  age: 20 + 12,
+  friends: ["Aram", "Ara", 'Araqs'],
+  job: "developer",
+};
+
+console.log(aboutMe);
+console.log(aboutMe.firstName);
+console.log(aboutMe["job"]);
+
+const interestedIn = prompt(
+  "What do you want to know about me? Choose between firstName, age, friends and job!"
+);
+console.log(interestedIn);
+//console.log(aboutMe[interestedIn]);//developer
+
+if (aboutMe[interestedIn]) {
+  console.log(aboutMe[interestedIn]);
+} else {
+  console.log("Wrong request! Choose between firstName, age, friends and job!");
+}
+
+//add new property to the object
+aboutMe.location = 'Yerevan';
+aboutMe['gitHub'] = 'https://github.com/anmarkosyan';
+console.log(aboutMe);
+
+//'Anush has 3 friends, and her best friend is called Aram'
+console.log(`${aboutMe.firstName} has ${aboutMe.friends.length} friends, and her best friend is called ${aboutMe.friends[0]}.`)
