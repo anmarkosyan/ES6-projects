@@ -239,6 +239,7 @@ console.log(aboutMe.me);
  */
 
 //============== 👩🏻‍💻 coding challenge ===============
+/*
 const mark = {
   fullName: "Mark Miller",
   mass: 78,
@@ -268,3 +269,58 @@ if (mark.bmi < john.bmi) {
     `${mark.fullName}'s BMI (${mark.bmi}) is higher than ${john.fullName}'s (${john.bmi})`
   );
 }
+
+ */
+
+//============= ✏️ Loop: as control structure ====================
+//1️⃣
+const aboutMeArray = ["Anu", 20 + 12, "developer", ["Aram", "Ara"]];
+const types = [];
+for (let i = 0; i < aboutMeArray.length; i++) {
+  //console.log(aboutMeArray[i], typeof aboutMeArray[i]);
+  //types[i] = typeof aboutMeArray[i];
+  types.push(typeof aboutMeArray[i]);
+}
+console.log(types);
+
+//2️⃣
+const years = [1991, 2000, 1986, 1981];
+const ages = [];
+for (let i = 0; i < years.length; i++) {
+  ages.push(2021 - years[i]);
+}
+console.log(ages);
+
+//3️⃣ loop inside a loop
+for (let exercise = 1; exercise <= 3; exercise++) {
+  console.log(`------- Starting Exercise ${exercise}`);
+
+  for (let rep = 1; rep <= 5; rep++) {
+    console.log(`Exercise ${exercise}: Lifting weight repetition ${rep} 🏋🏻‍ `);
+  }
+}
+
+//============= 👩🏻‍💻 coding challenge ===============
+const calcTip = (bill) =>
+  bill >= 50 && bill <= 300 ? (bill * 15) / 100 : (bill * 20) / 100;
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const total = [];
+
+for (let i = 0; i < bills.length; i++) {
+  //const tip = calcTip(bills[i]);
+  tips.push(calcTip(bills[i]));
+  total.push(bills[i] + tips[i]);
+}
+console.log(bills, tips, total);
+
+const calcAverage = function (arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum / arr.length;
+};
+console.log(calcAverage(bills));
+console.log(calcAverage(tips));
+console.log(calcAverage(total));
