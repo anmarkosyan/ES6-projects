@@ -2,7 +2,7 @@
 //1️⃣ strict mode forbids us to do certain things
 //2️⃣ it will actually create visible errors for us in certain situations in which without strict mode
 //JavaScript will simply fail silently without letting us know that we did a mistake.
-"use strict";
+'use strict';
 /*
 let hasDriversLicense = false;
 const passTest = true;
@@ -274,7 +274,7 @@ if (mark.bmi < john.bmi) {
 
 //============= ✏️ Loop: as control structure ====================
 //1️⃣
-const aboutMeArray = ["Anu", 20 + 12, "developer", ["Aram", "Ara"]];
+const aboutMeArray = ['Anu', 20 + 12, 'developer', ['Aram', 'Ara']];
 const types = [];
 for (let i = 0; i < aboutMeArray.length; i++) {
   //console.log(aboutMeArray[i], typeof aboutMeArray[i]);
@@ -301,7 +301,7 @@ for (let exercise = 1; exercise <= 3; exercise++) {
 }
 
 //============= 👩🏻‍💻 coding challenge ===============
-const calcTip = (bill) =>
+const calcTip = bill =>
   bill >= 50 && bill <= 300 ? (bill * 15) / 100 : (bill * 20) / 100;
 const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
 const tips = [];
