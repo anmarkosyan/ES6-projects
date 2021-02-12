@@ -2,7 +2,7 @@
 
 //1️⃣ SCOPING
 /*
-function calcAge(birthYear) {
+function calcAgeArw(birthYear) {
   const age = 2021 - birthYear;
   //console.log(firstName);
 
@@ -27,14 +27,15 @@ function calcAge(birthYear) {
   printAge();
   return age;
 }
-//calcAge(1986);// reference error: we cannot call the function before declaration firstName variable;
+//calcAgeArw(1986);// reference error: we cannot call the function before declaration firstName variable;
 const firstName = 'Anush';
-calcAge(1986); //Anush
+calcAgeArw(1986); //Anush
 
 
  */
 
 //2️⃣ HOISTING
+/*
 
 //❗️hoisting variables:
 //using before declaring them
@@ -84,3 +85,52 @@ var numProducts = 10;
 function deleteShoppingCard() {
   console.log('All products deleted!!!');
 }
+
+ */
+
+//3️⃣ THIS KEYWORD
+
+//console.log(this); // window global object
+
+//❗️ in regular function
+const calcAge = function (year) {
+  //console.log(2021 - year); //35
+  // console.log(this); //undefined => with 'strict mode' it has it's own this keyword, but it's undefined and not attached to the object
+  // but without strict mode it will point window global object
+};
+calcAge(1986);
+
+function calcAgeDec(year) {
+  //console.log(2021 - year);
+  //console.log(this); //this same like function expression
+}
+calcAgeDec(1986);
+
+//❗️ in arrow function
+
+const calcAgeArw = year => {
+  //console.log(2021 - year); //35
+  //console.log(this); //window => arrow function does not get it's own this keyword, and point the parent scope - global object
+};
+calcAgeArw(1986);
+
+//❗️ using this inside of a method: this will point  to the object that is  calling the method
+const me = {
+  year: 1986,
+  calcAge: function () {
+    //console.log(this); //{year: 1986, calcAge: ƒ}
+    console.log(2021 - this.year); //35
+  },
+};
+me.calcAge();
+
+const myFriend = {
+  year: 1990,
+};
+
+myFriend.calcAge = me.calcAge; //myFriend borrow the method from the me object
+myFriend.calcAge(); // 31 =>  now myFriend call the method
+
+const f = me.calcAge;
+console.log(f);// f function
+f();//undefined => be like regular function => undefined
