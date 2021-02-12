@@ -89,7 +89,7 @@ function deleteShoppingCard() {
  */
 
 //3️⃣ THIS KEYWORD
-
+/*
 //console.log(this); // window global object
 
 //❗️ in regular function
@@ -134,3 +134,61 @@ myFriend.calcAge(); // 31 =>  now myFriend call the method
 const f = me.calcAge;
 console.log(f);// f function
 f();//undefined => be like regular function => undefined
+
+
+ */
+//🧐 THIS keyword: Regular function vs arrow functions
+//DONT use VAR
+//var firstName = 'Araqs';
+
+const aram = {
+  firstName: 'Aram',
+  year: 1985,
+  calcAge: function () {
+    //console.log(this);
+    console.log(2021 - this.year); //35
+
+    //‼️ solution 1
+    // const self = this;
+    // const isMillennial = function () {
+    //   //console.log(this);//undefined: like regular function this point window object
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+    // isMillennial();//true
+
+    //‼️ Solution 2 THIS within arrow function
+    const isMillennial = () => {
+      console.log(this); //aram: => will point aram object because it is his parent scope
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillennial(); //true
+  },
+
+  // THIS IN  ARROW FUNCTION will point his parent scope which is window
+  // greet: () => {
+  //   console.log(this);//window object
+  //   console.log(` Hey ${this.firstName}`)
+  // },
+  greet: function () {
+    console.log(` Hey ${this.firstName}`);
+  },
+};
+aram.calcAge(); //36
+aram.greet(); // Hey undefined => this === window object and there is not firstName from aram variable
+aram.greet(); // hey Araqs => this === window object and var variable is there with firstName
+
+// Arguments keyword
+
+//regular functions
+const add = function (a, b) {
+  console.log(arguments);
+};
+
+add(3, 5); //[3, 5];
+add(3, 5, 6, 7, 8); //[3, 5, 6, 7, 8];
+
+const addArw = (a, b) => {
+  console.log(arguments);
+};
+
+addArw(3, 5);//Uncaught ReferenceError: arguments is not defined
