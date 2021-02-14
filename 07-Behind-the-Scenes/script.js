@@ -140,7 +140,7 @@ f();//undefined => be like regular function => undefined
 //🧐 THIS keyword: Regular function vs arrow functions
 //DONT use VAR
 //var firstName = 'Araqs';
-
+/*
 const aram = {
   firstName: 'Aram',
   year: 1985,
@@ -191,4 +191,46 @@ const addArw = (a, b) => {
   console.log(arguments);
 };
 
-addArw(3, 5);//Uncaught ReferenceError: arguments is not defined
+addArw(3, 5); //Uncaught ReferenceError: arguments is not defined
+
+ */
+
+//4️⃣ Primitives vs objects => primitives vs reference types
+//📍 primitive type
+let lastName = 'Mark';
+let oldLastName = lastName;
+lastName = 'Williams';
+
+console.log(lastName, oldLastName); // Williams Mark
+
+//📍reference type => object
+const anush = {
+  firstName: 'Anush',
+  lastName: 'Mark',
+  age: 34,
+};
+
+const marriedAnush = anush;
+//change value in both place
+marriedAnush.lastName = 'Williams';
+
+//marriedAnush = {};//with CONST var we cannot change value in the stack, just in heap;
+console.log('Before marriage:',anush);//       Before marriage: {firstName: "Anush", lastName: "Williams", age: 34}
+console.log('After marriage:', marriedAnush);//After marriage:  {firstName: "Anush", lastName: "Williams", age: 34}
+
+//📍Copying objects
+const stephan = {
+  firstName: 'Stephan',
+  lastName: 'Mark',
+  age: 34,
+  friend: ['An', 'Adam', 'Igor'],
+};
+//will create completely new object, all prop are really copied, but only shallow copy, not deep
+const me = Object.assign({}, stephan);
+me.firstName = 'Anush';
+me.friend.push('Vlad');//not deep copy, will appear in 2 place
+
+console.log(stephan);//{firstName: "Stephan", lastName: "Mark", age: 34, friend: Array(4)}
+console.log(me);//     {firstName: "Anush", lastName: "Mark", age: 34, friend: Array(4)}
+
+
