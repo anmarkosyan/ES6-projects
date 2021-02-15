@@ -89,7 +89,22 @@ const restaurant = {
   order: function (starterIdx, mainIdx) {
     return [this.starterMenu[starterIdx], this.mainMenu[mainIdx]];
   },
+
+  orderDelivery: function ({ time, address, mainIndex, starterIndex }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} 
+       will be delivered ${address} at ${time}`
+    );
+  },
 };
+
+//📍order food
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Abovyan 22/1',
+  mainIndex: 2,
+  starterIndex: 3,
+});
 
 //📍=> for create new variables we should use the same name as in object
 const { name, openingHours, categories } = restaurant;
@@ -118,4 +133,4 @@ console.log(a, b); //12 34
 const {
   fri: { open: o, close: c },
 } = openingHours;
-console.log(o, c);//11 23
+console.log(o, c); //11 23
