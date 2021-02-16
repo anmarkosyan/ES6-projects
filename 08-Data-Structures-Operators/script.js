@@ -36,6 +36,13 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
+
+  orderPizza: function (mainIng, ...otherIng) {
+    console.log(mainIng, otherIng); //mushrooms ["onion", "oregano", "olive"]
+    if (otherIng.length)
+      console.log(`Here is your pizza with ${mainIng} and ${otherIng}`);
+    else console.log(`Here is your simple pizza only with ${mainIng}`);
+  },
 };
 
 //1️⃣ Destructuring arrays
@@ -130,11 +137,12 @@ const {
 console.log(o, c); //11 23
 
  */
-//3️⃣ The Spread operator => whenever we need the elements
+//3️⃣ The SPREAD operator => whenever we need the elements
 // of an array individually,then we can use the spread operator
 //‼️ Only work when we pass spread argument into a function and when build a new array ‼️
 
 //📍add in other array
+/*
 const arr = [7, 3, 4];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
 const goodNewArr = [12, 23, ...arr];
@@ -177,3 +185,51 @@ const restaurantCopy = { ...restaurant };
 restaurantCopy.name = "Aram's house";
 console.log(restaurantCopy.name);//Aram's house
 console.log(restaurant.name);//Classico Italiano
+ */
+
+//4️⃣ REST operator
+//DESTRUCTURING
+//SPREAD, because on RIGHT side of assignment operator(=)
+const arr = [1, 2, ...[3, 4], 5, 6];
+console.log(arr); //[1, 2, 3, 4, 5, 6]
+
+//REST, because on LEFT side of (=) and always must be the last element
+const [a, b, ...other] = [1, 2, 3, 4];
+const [x, y, ...others] = arr;
+console.log(typeof a, typeof other); //number object
+console.log(a, b, other); //1 2 [3, 4]
+console.log(x, y, others); //1 2 [3, 4, 5, 6]
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood); //Pizza Risotto ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"]
+
+//📍 for objects destructuring
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat); //{open: 0, close: 24}
+console.log(weekDays); //{thu: {…}, fri: {…}}
+
+//📍 1) Functions
+const add = function (...numbers) {
+  let sum = 0;
+  //1)
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  //2)
+  //for(let num of numbers) sum += num;
+  //3)
+  //const sum = numbers.reduce((acc, curr) => el + acc, 0);
+
+  console.log(sum);
+};
+add(2, 3); //5
+add(2, 4, 6, 7); //19
+add(4, 5, 6, 7, 8, 9, 2, 3, 4); //48
+
+const r = [23, 1, 3];
+add(...r); //27
+
+//📍2) function
+restaurant.orderPizza('mushrooms', 'onion', 'oregano', 'olive');
+restaurant.orderPizza('mushroom'); //mushroom []
