@@ -1,4 +1,21 @@
 'use strict';
+const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const [a] = weekDays;
+const openingHours = {
+  //using the object literal syntax
+  [weekDays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [`day-${2 + 3}`]: {
+    open: 11,
+    close: 23,
+  },
+  [a]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 
 const restaurant = {
   name: 'Classico Italiano',
@@ -6,27 +23,15 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  //using the object literal syntax
+  openingHours,
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-
-  order: function (starterIdx, mainIdx) {
+  //using ES6 object literals syntax, without functions keyword
+  order(starterIdx, mainIdx) {
     return [this.starterMenu[starterIdx], this.mainMenu[mainIdx]];
   },
 
-  orderDelivery: function ({ time, address, mainIndex, starterIndex }) {
+  orderDelivery({ time, address, mainIndex, starterIndex }) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} 
        will be delivered ${address} at ${time}`
@@ -364,15 +369,17 @@ team1 > team2 && console.log('Team 2 is more likely to win');
  */
 
 //6️⃣ Loop over array: ES6 for...of => here we can use continue and break keywords
+/*
 const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
 //here we cannot get index of each element
 for (const food of menu) console.log(food); //Focaccia ...
 
-//using entries() we get an array for each item with index num, and item
+//using entries() method which new Array Iterator object that contains the key/value pairs for each index in the array.
 for (const [i, el] of menu.entries()) {
   //console.log(`${food[0] + 1}: ${food[1]}`);
-  console.log(`${i + 1}: ${el}`);
-} //[0, "Focaccia"] ...
+  console.log(`${i + 1}: ${el}`); //[0, "Focaccia"] ...
+}
 
 //console.log([...menu.entries()]);//[Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+ */
