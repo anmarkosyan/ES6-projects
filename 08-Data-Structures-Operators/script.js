@@ -39,9 +39,9 @@ const restaurant = {
 
   orderPizza: function (mainIng, ...otherIng) {
     console.log(mainIng, otherIng); //mushrooms ["onion", "oregano", "olive"]
-    if (otherIng.length)
-      console.log(`Here is your pizza with ${mainIng} and ${otherIng}`);
-    else console.log(`Here is your simple pizza only with ${mainIng}`);
+    otherIng.length
+      ? console.log(`Here is your pizza with ${mainIng} and ${otherIng}`)
+      : console.log(`Here is your simple pizza only with ${mainIng}`);
   },
 };
 
@@ -187,7 +187,8 @@ console.log(restaurantCopy.name);//Aram's house
 console.log(restaurant.name);//Classico Italiano
  */
 
-//4️⃣ REST operator
+//4️⃣ REST pattern
+/*
 //DESTRUCTURING
 //SPREAD, because on RIGHT side of assignment operator(=)
 const arr = [1, 2, ...[3, 4], 5, 6];
@@ -233,3 +234,36 @@ add(...r); //27
 //📍2) function
 restaurant.orderPizza('mushrooms', 'onion', 'oregano', 'olive');
 restaurant.orderPizza('mushroom'); //mushroom []
+
+ */
+
+//5️⃣ Logical operators || and &&
+//They can use ANY data type, can return ANY data type, do short-circuiting
+//📍 || => or
+console.log('----- OR -----');
+console.log(3 || 'Anush'); //3
+console.log('' || true); //true
+console.log(undefined || null); //null
+console.log(0 || []); //[]
+console.log(null || 0 || false || 'anush' || true); //anush => will return first true value and stop circuit
+
+//📍 setting default values with ||
+//restaurant.numGuests = 23;//
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+const guests2 = restaurant.numGuests || 10; //the same
+console.log(guests1); //10
+console.log(guests2); // 10
+
+//📍 && => and => All need to be true
+console.log('---- AND -----');
+console.log(0 && 'Anush'); //0 => will return first false value and stop circuit
+console.log(23 && 'Aram'); // Aram => if all is true will return last true value
+console.log(23 && 'hi' && true && 23 + 3); // 26
+console.log(23 && 'hi' && true && null && 23 + 3); // null first false value
+
+//📍 function example
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza('mushroom', 'onion');
+// }
+//same like this
+restaurant.orderPizza && restaurant.orderPizza('mushroom', 'onion');
