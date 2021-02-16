@@ -293,7 +293,7 @@ console.log(guest);//0
 //
 //
 //  TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
-
+/*
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -361,3 +361,18 @@ printGoals(...game.scored);
 //7.
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
+ */
+
+//6️⃣ Loop over array: ES6 for...of => here we can use continue and break keywords
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+//here we cannot get index of each element
+for (const food of menu) console.log(food); //Focaccia ...
+
+//using entries() we get an array for each item with index num, and item
+for (const [i, el] of menu.entries()) {
+  //console.log(`${food[0] + 1}: ${food[1]}`);
+  console.log(`${i + 1}: ${el}`);
+} //[0, "Focaccia"] ...
+
+//console.log([...menu.entries()]);//[Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
