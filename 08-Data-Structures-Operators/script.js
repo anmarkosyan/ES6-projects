@@ -248,7 +248,7 @@ console.log(0 || []); //[]
 console.log(null || 0 || false || 'anush' || true); //anush => will return first true value and stop circuit
 
 //📍 setting default values with ||
-//restaurant.numGuests = 23;//
+//restaurant.numGuests = 23;//but if 0 it will be false
 const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
 const guests2 = restaurant.numGuests || 10; //the same
 console.log(guests1); //10
@@ -267,3 +267,8 @@ console.log(23 && 'hi' && true && null && 23 + 3); // null first false value
 // }
 //same like this
 restaurant.orderPizza && restaurant.orderPizza('mushroom', 'onion');
+
+//📍 Nullish coalescing: null and undefined === false,  0 and '' === true;
+restaurant.numGuests = 0;
+const guest = restaurant.numGuests ?? 10;
+console.log(guest);//0
