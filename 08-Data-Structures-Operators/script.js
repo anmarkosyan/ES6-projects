@@ -7,7 +7,7 @@ const openingHours = {
     open: 12,
     close: 22,
   },
-  [`day-${2 + 3}`]: {
+  [weekDays[4]]: {
     open: 11,
     close: 23,
   },
@@ -18,15 +18,16 @@ const openingHours = {
 };
 
 const restaurant = {
+  //using the object literal syntax
+  openingHours,
+  weekDays,
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  //using the object literal syntax
-  openingHours,
 
-  //using ES6 object literals syntax, without functions keyword
+  //using ES6 object literals syntax, without functions keyword and :
   order(starterIdx, mainIdx) {
     return [this.starterMenu[starterIdx], this.mainMenu[mainIdx]];
   },
@@ -38,11 +39,11 @@ const restaurant = {
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
 
-  orderPizza: function (mainIng, ...otherIng) {
+  orderPizza(mainIng, ...otherIng) {
     console.log(mainIng, otherIng); //mushrooms ["onion", "oregano", "olive"]
     otherIng.length
       ? console.log(`Here is your pizza with ${mainIng} and ${otherIng}`)
@@ -383,3 +384,34 @@ for (const [i, el] of menu.entries()) {
 
 //console.log([...menu.entries()]);//[Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
  */
+
+//7️⃣ Optional chaining ES2020: for checking
+//if want to check
+//📍old way
+if (restaurant.openingHours && restaurant.openingHours.tue)
+  console.log(restaurant.openingHours.tue.open); // Uncaught TypeError: Cannot read property 'open' of undefined
+
+//if (restaurant.openingHours.fri) console.log(restaurant.openingHours.fri.open); //11
+
+//📍with optional chaining: ES2020
+//if not exist: is null or undefined, immediately return UNDEFINED (NOT TypeERROR)
+console.log(restaurant.openingHours?.tue?.open); //undefined
+//if exist: 0, '', value
+console.log(restaurant.openingHours.mon?.open); //0
+
+//📍real example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+//📍methods: for checking if method exist after call it
+console.log(restaurant.order?.(1, 2) ?? "Method doesn't exist!!!");//["Bruschetta", "Risotto"]
+console.log(restaurant.orderRizzoto?.(1, 2) ?? "Method doesn't exist!!!"); //Method doesn't exist!!!
+
+//📍arrays: for checking if array is empty
+const user = [{name: 'An', age: 23}, {name: 'John'}];
+console.log(user[0]?.name ?? 'User array empty!!!');//An
+console.log(user[1]?.age ?? 'User age is not defined!!!');//User age is not defined!!!
