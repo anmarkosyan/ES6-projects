@@ -596,6 +596,7 @@ console.log(new Set(str).size); //4
  */
 
 //🔟  MAP: data structure
+/*
 const rest = new Map();
 //📍 set/add => key/value
 rest
@@ -633,8 +634,39 @@ console.log(rest.get(arr));//test
 const dom = document.querySelector('h1');
 rest.set(dom, 'heading');
 console.log(rest.get(dom));//heading
+ */
 
+//📍Iteration
+const questions = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct answer 🎉'],
+  [false, 'Try again 🏋🏻‍♀️'],
+]);
+console.log(questions); //{"question" => "What is the best programming language in the world?", 1 => "C", 2 => "Java", 3 => "JavaScript"}
 
+//📍 Convert object to map
+console.log(Object.entries(openingHours)); //look the same as a map with arrays
+//so we can do this
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap); //{"thu" => {…}, "fri" => {…}, "mon" => {…}}
 
+//📍 looping
+console.log(questions.get('question'));
+for (const [key, val] of questions) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${val}`);
+}
 
+// const answer = Number(prompt('Your answer...'));
+// const corr = questions.get('correct');//3
+// console.log(questions.get(answer === corr));
+
+//📍 convert map to the array
+console.log([...questions]);
+console.log(questions.entries());
+console.log(questions.keys());
+console.log(questions.values());
 
