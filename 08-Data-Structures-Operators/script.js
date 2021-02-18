@@ -386,6 +386,7 @@ for (const [i, el] of menu.entries()) {
  */
 
 //7️⃣ Optional chaining ES2020: for checking
+/*
 //if want to check
 //📍old way
 if (restaurant.openingHours && restaurant.openingHours.tue)
@@ -415,3 +416,39 @@ console.log(restaurant.orderRizzoto?.(1, 2) ?? "Method doesn't exist!!!"); //Met
 const user = [{name: 'An', age: 23}, {name: 'John'}];
 console.log(user[0]?.name ?? 'User array empty!!!');//An
 console.log(user[1]?.age ?? 'User age is not defined!!!');//User age is not defined!!!
+
+ */
+
+//8️⃣ OBJECT LOOPING:
+//📍looping over PROPERTY NAMES/KEYS
+for (const day of Object.keys(openingHours)) {
+  console.log(day); //thu fri mon
+}
+//or
+const keyArray = Object.keys(openingHours);
+console.log(keyArray); //["thu", "fri", "mon"]
+
+let openStr = `We are open on ${keyArray.length} days: `;
+
+for (const day of keyArray) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+//📍looping over PROPERTY VALUES/VALUES
+const valArray = Object.values(openingHours);
+console.log(valArray);//[{…}, {…}, {…}]
+
+for(const {open, close} of valArray){
+  console.log(`our open at ${open} and close at ${close}`);
+}
+
+//📍Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);//[Array(2), Array(2), Array(2)]
+
+for(const [key, {open, close}] of entries){
+  console.log(`On ${key} we open at ${open} and close at ${close}`)
+
+}
+
