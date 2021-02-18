@@ -475,7 +475,7 @@ and the number of goals as the value. In this game, it will look like this:
 }
 
  */
-
+/*
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -546,13 +546,53 @@ for (const [team, val] of oddsEntries) {
 }
 
 //🏋🏻‍bonus
-// {
-//   Gnarby: 1,
-//     Hummels: 1,
-//   Lewandowski: 2
-// }
 const scorers = {};
 for (const name of game.scored) {
   scorers[name] ? scorers[name]++ : (scorers[name] = 1);
 }
 console.log(scorers);
+
+ */
+
+//9️⃣ SETS
+console.log(new Set('anushanush')); //{"a", "n", "u", "s", "h"}
+
+const orderSet = new Set([
+  'pizza',
+  'risotto',
+  'pizza',
+  'pasta',
+  'pizza',
+  'pasta',
+]);
+
+console.log(orderSet); //Set(3){"pizza", "risotto", "pasta"}
+console.log(orderSet.size); //3
+console.log(orderSet.has('pizza')); //true
+console.log(orderSet.add('cake')); //{"pizza", "risotto", "pasta", "cake"}
+console.log(orderSet.delete('pizza')); //true
+console.log(orderSet);//{"risotto", "pasta", "cake"}
+//console.log(orderSet[0]);//undefined
+
+for(const val of orderSet) console.log(val);//risotto pasta cake
+
+
+//📍Use cases
+//remove duplicate values of arrays
+const staff = ['waiter', 'chef', 'manager', 'waiter', 'chef', 'manager'];
+
+const uniqueStaff = new Set(staff);
+const staffSize = new Set(staff).size;
+console.log(uniqueStaff);//{"waiter", "chef", "manager"}
+console.log(staffSize);//3
+
+// convert to the array
+const staffArr = [...new Set(staff)];//
+console.log(staffArr);//["waiter", "chef", "manager"]
+
+//count how many unique letters in a string
+const str = 'hello';
+console.log(new Set(str).size);//4
+
+
+
