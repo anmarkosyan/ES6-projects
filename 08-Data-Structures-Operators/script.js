@@ -554,7 +554,8 @@ console.log(scorers);
 
  */
 
-//9️⃣ SETS
+//9️⃣ SET: data structure
+/*
 console.log(new Set('anushanush')); //{"a", "n", "u", "s", "h"}
 
 const orderSet = new Set([
@@ -571,11 +572,10 @@ console.log(orderSet.size); //3
 console.log(orderSet.has('pizza')); //true
 console.log(orderSet.add('cake')); //{"pizza", "risotto", "pasta", "cake"}
 console.log(orderSet.delete('pizza')); //true
-console.log(orderSet);//{"risotto", "pasta", "cake"}
+console.log(orderSet); //{"risotto", "pasta", "cake"}
 //console.log(orderSet[0]);//undefined
 
-for(const val of orderSet) console.log(val);//risotto pasta cake
-
+for (const val of orderSet) console.log(val); //risotto pasta cake
 
 //📍Use cases
 //remove duplicate values of arrays
@@ -583,16 +583,58 @@ const staff = ['waiter', 'chef', 'manager', 'waiter', 'chef', 'manager'];
 
 const uniqueStaff = new Set(staff);
 const staffSize = new Set(staff).size;
-console.log(uniqueStaff);//{"waiter", "chef", "manager"}
-console.log(staffSize);//3
+console.log(uniqueStaff); //{"waiter", "chef", "manager"}
+console.log(staffSize); //3
 
 // convert to the array
-const staffArr = [...new Set(staff)];//
-console.log(staffArr);//["waiter", "chef", "manager"]
+const staffArr = [...new Set(staff)]; //
+console.log(staffArr); //["waiter", "chef", "manager"]
 
 //count how many unique letters in a string
 const str = 'hello';
-console.log(new Set(str).size);//4
+console.log(new Set(str).size); //4
+ */
+
+//🔟  MAP: data structure
+const rest = new Map();
+//📍 set/add => key/value
+rest
+  .set('name', 'Aram house')
+  .set(1, 'pizza')
+  .set(2, 'risotto')
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 10)
+  .set('close', 19)
+  .set(true, 'We are open 🙏')
+  .set(false, 'We are closed 😔');
+console.log(rest); //{"name" => "Aram house", 1 => "pizza", 2 => "risotto", "categories" => Array(4)}
+
+//📍Get method:how to read data
+console.log(rest.get('name'));//Aram house
+//console.log(rest.get(true));//we are open 🙏
+
+//use case
+const currTime = 16;
+console.log(rest.get(currTime >= rest.get('open') && currTime <= rest.get('close')));//we are open 🙏
+
+//📍 other methods
+rest.has('categories');//true
+rest.delete(2);//true
+// rest.clear();//{}
+console.log(rest);//{"name" => "Aram house", 1 => "pizza", "categories" => Array(4), "open" => 10, "close" => 19,…}
+console.log(rest.size);//7
+
+
+const arr = [1, 2, 3];
+rest.set(arr, 'test');
+//console.log(rest.get([1,2]));//undefined
+console.log(rest.get(arr));//test
+
+const dom = document.querySelector('h1');
+rest.set(dom, 'heading');
+console.log(rest.get(dom));//heading
+
+
 
 
 
