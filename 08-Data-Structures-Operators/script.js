@@ -1,4 +1,5 @@
 'use strict';
+/*
 const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const [a] = weekDays;
 const openingHours = {
@@ -50,6 +51,8 @@ const restaurant = {
       : console.log(`Here is your simple pizza only with ${mainIng}`);
   },
 };
+
+ */
 
 //1️⃣ Destructuring arrays
 /*
@@ -683,7 +686,7 @@ The values are the events themselves, and the keys are the minutes in which each
       [FIRST HALF] 17: ⚽️ GOAL
 GOOD LUCK 😀
 */
-
+/*
 const gameEvents = new Map([
   [17, '⚽️ GOAL'],
   [36, '🔁 Substitution'],
@@ -719,3 +722,46 @@ for (const [key, val] of gameEvents) {
   const half = key < 45 ? 'FIRST' : 'SECOND';
   console.log(`[${half} HALF] ${key}: ${val}`);
 }
+ */
+
+//1️⃣1️⃣ Strings
+const airLine = 'TOP Air Armenia';
+const plane = 'A320';
+
+console.log(plane[0]); //A
+console.log(plane[1]); //3
+console.log(plane[2]); //2
+console.log('B232'[0]); //B
+
+console.log(plane.length); //4
+console.log('B232'.length); //4
+
+console.log(airLine.indexOf('m')); //6
+console.log(airLine.lastIndexOf('A')); //4
+
+console.log(airLine.slice(4)); //Air
+console.log(airLine.slice(4, 7)); //Air
+
+console.log(airLine.slice(0, airLine.indexOf(' '))); //TOP=> extract first word
+console.log(airLine.slice(airLine.lastIndexOf(' ') + 1)); //Armenia => extract last word
+
+console.log(airLine.slice(-1)); //a => last char of string
+console.log(airLine.slice(-3)); //nia => last 3 chars of string
+console.log(airLine.slice(1, -1)); //OP Air Armeni => cut first and last chars
+
+const checkMiddleSeat = function (seat) {
+  //B and E are middle seats
+  const lastChar = seat.slice(-1);
+  if (lastChar === 'B' || lastChar === 'E')
+    console.log(`${seat}: You got middle seat 😬`);
+  else console.log(`${seat}: You got lucky 🤩`);
+};
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('12E');
+
+//❓if string is primitive data type, why it has a so many methods?
+//It will automatically behind the scenes convert it to string object -> call the method -> put again as a primitive string
+
+console.log(typeof new String('Anush'));//{"Anush"} => object
+console.log(typeof new String('hello')[0]);//h => string
