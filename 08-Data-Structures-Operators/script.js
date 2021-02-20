@@ -725,6 +725,7 @@ for (const [key, val] of gameEvents) {
  */
 
 //1️⃣1️⃣ Strings
+/*
 const airLine = 'TOP Air Armenia';
 const plane = 'A320';
 
@@ -765,3 +766,71 @@ checkMiddleSeat('12E');
 
 console.log(typeof new String('Anush'));//{"Anush"} => object
 console.log(typeof new String('hello')[0]);//h => string
+ */
+
+//✅ part 2
+const airLine = 'TOP Air Armenia';
+
+console.log(airLine.toLowerCase());
+console.log(airLine.toUpperCase());
+console.log('hello'.toUpperCase());
+
+//❗️fix the capitalization in name
+const passenger = 'dAvID'; // David
+const lower = passenger.toLowerCase();
+const correctName = lower[0].toUpperCase() + lower.slice(1);
+console.log(correctName); //David
+
+//❗️example
+const capitalName = function (name) {
+  const loweCase = name.toLowerCase().split(' ');
+  let newStr = '';
+  for (const n of loweCase) {
+    newStr += n[0].toUpperCase() + n.slice(1) + ' ';
+  }
+  console.log(newStr);
+};
+capitalName('aNuSh');
+capitalName('mArK sOnY Seda');
+
+//❗️example check email
+const email = 'anush@gmail.com';
+const loginEmail = '   ANUSh@GMail.Com  \n';
+
+const check = loginEmail.toLowerCase().trim();
+console.log(email === check); //true
+
+//❗️replacing
+const priceGB = '234,56€';
+const priceUS = priceGB.replace('€', '﹩').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23! ';
+console.log(announcement.replace('door', 'gate')); //replace just first word
+//using regexp
+console.log(announcement.replace(/door/g, 'gate')); //in all place
+
+//❗️includes, startsWith/endsWith
+const plane = 'Airbus A321neo';
+console.log(plane.includes('A32')); //true
+console.log(plane.includes('34')); //false
+console.log(plane.startsWith('A321')); //true
+console.log(plane.startsWith('A324')); //false
+console.log(plane.endsWith('neo')); //true
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo'))
+  console.log('Part of NEW Airbus family!');
+
+//example
+const checkBaggage = function (items) {
+  const lowerText = items.toLowerCase();
+  if (lowerText.includes('gun') || lowerText.includes('knife')) {
+    console.log('Strong check of this person!!!!!');
+  } else {
+    console.log('Welcome aboard🙏');
+  }
+};
+checkBaggage('I have a laptop, some Food, and pocket Knife.');
+checkBaggage('Socks, camera.');
+checkBaggage('Got some snacks and gun for protection.');
