@@ -769,6 +769,7 @@ console.log(typeof new String('hello')[0]);//h => string
  */
 
 //✅ part 2
+/*
 const airLine = 'TOP Air Armenia';
 
 console.log(airLine.toLowerCase());
@@ -834,3 +835,55 @@ const checkBaggage = function (items) {
 checkBaggage('I have a laptop, some Food, and pocket Knife.');
 checkBaggage('Socks, camera.');
 checkBaggage('Got some snacks and gun for protection.');
+ */
+
+//✅ part 3
+//📍split('separator') and join('separator');
+console.log('a+very+nice+place'.split('+')); //["a", "very", "nice", "place"]
+console.log('anush markosyan'.split(' ')); //["anush", "markosyan"]
+
+const [firstName, lastName] = 'Anush markosyan'.split(' ');
+const newName = ['Miss.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const arr = name.split(' ');
+  //const newName = [];
+  let newStr = '';
+  for (const n of arr) {
+    //newName.push(n[0].toUpperCase() + n.slice(1));
+    //newStr += n[0].toUpperCase() + n.slice(1) + ' ';
+    newStr += n.replace(n[0], n[0].toUpperCase()) + ' ';
+  }
+  //console.log(newName.join(' '));
+  console.log(newStr);
+};
+capitalizeName('jessica ann smith corner');
+capitalizeName('anush markosyan');
+
+//📍 padding
+const message = 'Go to gate 23';
+console.log(message.padStart(25, '+').padEnd(30, '+')); //++++++++++++Go to gate 23+++++
+console.log('Anush'.padStart(25, '+').padEnd(30, '+')); //++++++++++++++++++++Anush+++++
+
+//exp:
+const maskCreditCards = function (number) {
+  const str = number + '';
+  const lastDig = str.slice(-4);
+  const length = str.length;
+  return lastDig.padStart(length, '*');
+};
+console.log(maskCreditCards(123234345456)); //********5456
+console.log(maskCreditCards('3457891234567889456')); //***************9456
+
+//📍 repeat
+const message2 = 'Bad weather... All departures delayed... \n';
+console.log(message2.repeat(3));
+
+//exp:
+const planesInLine = function (n) {
+  return `There are ${n} planes in line ${'🛩'.repeat(n)}`;
+};
+console.log(planesInLine(5)); //There are 5 planes in line 🛩🛩🛩🛩🛩
+console.log(planesInLine(12)); //There are 12 planes in line 🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩
+console.log(planesInLine(2)); //There are 2 planes in line 🛩🛩
