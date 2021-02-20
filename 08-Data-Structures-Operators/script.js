@@ -890,7 +890,7 @@ console.log(planesInLine(12)); //There are 12 planes in line 🛩🛩🛩🛩�
 console.log(planesInLine(2)); //There are 2 planes in line 🛩🛩
  */
 
-//==================================== 👩🏻‍💻 coding challenge ==========================
+//==================================== 👩🏻‍💻 coding challenge N4 ==========================
 /*
 Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
 The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
@@ -923,7 +923,7 @@ const btn = document.querySelector('button');
 const textArea = document.querySelector('textarea');
 
 btn.addEventListener('click', () => {
-  let str = textArea.value;
+  const str = textArea.value;
   const arr = str.toLowerCase().split('\n');
   let newStr = '';
   for (const [i, name] of arr.entries()) {
