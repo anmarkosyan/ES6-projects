@@ -948,7 +948,9 @@ const flights =
 //   🔴 Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
 
-const getCode = str => str.toUpperCase().replace(/\d/g, '');
+//const getCode = str => str.toUpperCase().replace(/\d/g, '');
+//or
+const getCode = str => str.slice(0, 3).toUpperCase();
 
 const arr = flights.split('+');
 for (const flight of arr) {
@@ -963,5 +965,5 @@ for (const flight of arr) {
     name.startsWith(' Delayed') ? '🔴' : ''
   }${name} from ${flyFrom} to ${flyTo} (${hour})`;
 
-  console.log(msg.padStart(45, ' '));
+  console.log(msg.padStart(45));
 }
