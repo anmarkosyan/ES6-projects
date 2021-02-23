@@ -1,7 +1,7 @@
 'use strict';
 /*
 const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-const [a] = weekDays;
+const [type] = weekDays;
 const openingHours = {
   //using the object literal syntax
   [weekDays[3]]: {
@@ -12,7 +12,7 @@ const openingHours = {
     open: 11,
     close: 23,
   },
-  [a]: {
+  [type]: {
     open: 0, // Open 24 hours
     close: 24,
   },
@@ -58,10 +58,10 @@ const restaurant = {
 /*
 const arr = [2, 3, 4];
 //usual approach
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
-console.log(a, b, c); // 2, 3, 4
+const type = arr[0];
+const from = arr[1];
+const to = arr[2];
+console.log(type, from, to); // 2, 3, 4
 
 //destructuring
 const [x, y, z] = arr;
@@ -88,7 +88,7 @@ let [main, , secondary] = restaurant.categories;
 console.log(main, secondary); //Vegetarian Italian
 
 //📍=> how to order food
-//receive 2 return values from a function
+//receive 2 return values from type function
 const [starter, mainList] = restaurant.order(2, 0);
 console.log(starter, mainList); //Garlic Bread Pizza
 
@@ -133,22 +133,22 @@ const { menu = [], starterMenu: starter = [] } = restaurant;
 console.log(menu, starter); //[] (4)["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"]
 
 //📍=> mutating variables
-let a = 111;
-let b = 23;
-const obj = { a: 12, b: 34, c: 56 };
-({ a, b } = obj);
-console.log(a, b); //12 34
+let type = 111;
+let from = 23;
+const obj = { type: 12, from: 34, to: 56 };
+({ type, from } = obj);
+console.log(type, from); //12 34
 
 //📍=> nested object destructuring
 const {
-  fri: { open: o, close: c },
+  fri: { open: o, close: to },
 } = openingHours;
-console.log(o, c); //11 23
+console.log(o, to); //11 23
 
  */
 //3️⃣ The SPREAD operator => whenever we need the elements
 // of an array individually,then we can use the spread operator
-//‼️ Only work when we pass spread argument into a function and when build a new array ‼️
+//‼️ Only work when we pass spread argument into type function and when build type new array ‼️
 
 //📍add in other array
 /*
@@ -173,17 +173,17 @@ console.log(menu);
 //📍Iterables: strings, arrays, maps, sets but NOT objects
 const str = 'Mark';
 const letter = [...str];
-console.log(letter); //["M", "a", "r", "k"]
-console.log(...letter); //M a r k
+console.log(letter); //["M", "type", "r", "k"]
+console.log(...letter); //M type r k
 //console.log(`${...letter} letter`);//Uncaught SyntaxError: Unexpected token '...'
 
 //📍using into functions
 // const ingredients = [
-//   prompt("Let's make a pasta! Ingredients 1?"),
+//   prompt("Let's make type pasta! Ingredients 1?"),
 //   prompt('Ingredients 2?'),
 //   prompt('Ingredients 3?'),
 // ];
-// console.log(ingredients);//["a", "b", "c"]
+// console.log(ingredients);//["type", "from", "to"]
 // restaurant.orderPasta(...ingredients);
 
 //📍 since ES 2018, spread operator also work on objects
@@ -204,10 +204,10 @@ const arr = [1, 2, ...[3, 4], 5, 6];
 console.log(arr); //[1, 2, 3, 4, 5, 6]
 
 //REST, because on LEFT side of (=) and always must be the last element
-const [a, b, ...other] = [1, 2, 3, 4];
+const [type, from, ...other] = [1, 2, 3, 4];
 const [x, y, ...others] = arr;
-console.log(typeof a, typeof other); //number object
-console.log(a, b, other); //1 2 [3, 4]
+console.log(typeof type, typeof other); //number object
+console.log(type, from, other); //1 2 [3, 4]
 console.log(x, y, others); //1 2 [3, 4, 5, 6]
 
 const [pizza, , risotto, ...otherFood] = [
@@ -291,10 +291,10 @@ console.log(guest);//0
 // and one array ('fieldPlayers') with all the remaining 10 field players
 //3. Create an array 'allPlayers' containing all players of both teams (22 players)
 //4. During the game, Bayern Munich (team 1) used 3 substitute players.
-// So create a new array ('players1Final') containing all the original
+// So create type new array ('players1Final') containing all the original
 // team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
 //5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
-//6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and
+//6. Write type function ('printGoals') that receives an arbitrary number of player names (NOT an array) and
 // prints each of them to the console, along with the number of goals that were scored in
 // total (number of player names passed in)
 //7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win,
@@ -461,8 +461,8 @@ for(const [key, {open, close}] of entries){
 //======================== 👩🏻‍💻 coding challenge N2 ========================
 /*
 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
-2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
-3. Print the 3 odds to the console, but in a nice formatted way, exactly like this:
+2. Use type loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in type nice formatted way, exactly like this:
 Odd of victory Bayern Munich: 1.33
 Odd of draw: 3.25
 Odd of victory Borrussia Dortmund: 6.5
@@ -559,7 +559,7 @@ console.log(scorers);
 
 //9️⃣ SET: data structure
 /*
-console.log(new Set('anushanush')); //{"a", "n", "u", "s", "h"}
+console.log(new Set('anushanush')); //{"type", "n", "u", "s", "h"}
 
 const orderSet = new Set([
   'pizza',
@@ -593,7 +593,7 @@ console.log(staffSize); //3
 const staffArr = [...new Set(staff)]; //
 console.log(staffArr); //["waiter", "chef", "manager"]
 
-//count how many unique letters in a string
+//count how many unique letters in type string
 const str = 'hello';
 console.log(new Set(str).size); //4
  */
@@ -653,7 +653,7 @@ const questions = new Map([
 console.log(questions); //{"question" => "What is the best programming language in the world?", 1 => "C", 2 => "Java", 3 => "JavaScript"}
 
 //📍 Convert object to map
-console.log(Object.entries(openingHours)); //look the same as a map with arrays
+console.log(Object.entries(openingHours)); //look the same as type map with arrays
 //so we can do this
 const hoursMap = new Map(Object.entries(openingHours));
 console.log(hoursMap); //{"thu" => {…}, "fri" => {…}, "mon" => {…}}
@@ -677,11 +677,11 @@ console.log(questions.values());
 
 //======================= 👩🏻‍💻 coding challenge N3 ======================
 /*
-Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game.
-The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+Let's continue with our football betting app! This time, we have type map with type log of the events that happened during the game.
+The values are the events themselves, and the keys are the minutes in which each event happened (type football game has 90 minutes plus some extra time).
 1. Create an array 'events' of the different game events that happened (no duplicates)
 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
-3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that type game has 90 minutes)
 4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
       [FIRST HALF] 17: ⚽️ GOAL
 GOOD LUCK 😀
@@ -746,7 +746,7 @@ console.log(airLine.slice(4, 7)); //Air
 console.log(airLine.slice(0, airLine.indexOf(' '))); //TOP=> extract first word
 console.log(airLine.slice(airLine.lastIndexOf(' ') + 1)); //Armenia => extract last word
 
-console.log(airLine.slice(-1)); //a => last char of string
+console.log(airLine.slice(-1)); //type => last char of string
 console.log(airLine.slice(-3)); //nia => last 3 chars of string
 console.log(airLine.slice(1, -1)); //OP Air Armeni => cut first and last chars
 
@@ -761,8 +761,8 @@ checkMiddleSeat('11B');
 checkMiddleSeat('23C');
 checkMiddleSeat('12E');
 
-//❓if string is primitive data type, why it has a so many methods?
-//It will automatically behind the scenes convert it to string object -> call the method -> put again as a primitive string
+//❓if string is primitive data type, why it has type so many methods?
+//It will automatically behind the scenes convert it to string object -> call the method -> put again as type primitive string
 
 console.log(typeof new String('Anush'));//{"Anush"} => object
 console.log(typeof new String('hello')[0]);//h => string
@@ -832,7 +832,7 @@ const checkBaggage = function (items) {
     console.log('Welcome aboard🙏');
   }
 };
-checkBaggage('I have a laptop, some Food, and pocket Knife.');
+checkBaggage('I have type laptop, some Food, and pocket Knife.');
 checkBaggage('Socks, camera.');
 checkBaggage('Got some snacks and gun for protection.');
  */
@@ -840,7 +840,7 @@ checkBaggage('Got some snacks and gun for protection.');
 //✅ part 3
 /*
 //📍split('separator') and join('separator');
-console.log('a+very+nice+place'.split('+')); //["a", "very", "nice", "place"]
+console.log('type+very+nice+place'.split('+')); //["type", "very", "nice", "place"]
 console.log('anush markosyan'.split(' ')); //["anush", "markosyan"]
 
 const [firstName, lastName] = 'Anush markosyan'.split(' ');
@@ -892,8 +892,8 @@ console.log(planesInLine(2)); //There are 2 planes in line 🛩🛩
 
 //==================================== 👩🏻‍💻 coding challenge N4 ==========================
 /*
-Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
-The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+Write type program that receives type list of variable names written in underscore_case and convert them to camelCase.
+The input will come from type textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
 
 THIS TEST DATA (pasted to textarea)
 underscore_case
@@ -908,14 +908,14 @@ firstName           ✅✅
 someVariable        ✅✅✅
 calculateAge        ✅✅✅✅
 delayedDeparture    ✅✅✅✅✅
-HINT 1: Remember which character defines a new line in the textarea 😉
-HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 1: Remember which character defines type new line in the textarea 😉
+HINT 2: The solution only needs to work for type variable made out of 2 words, like a_b
 HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
 HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
 Afterwards, test with your own test data!
 GOOD LUCK 😀
 */
-
+/*
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 
@@ -934,3 +934,34 @@ btn.addEventListener('click', () => {
   }
   console.log(newStr);
 });
+
+ */
+
+//=============================== 👩🏻‍💻 coding challenge N5 ==============================
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+' +
+  '_Arrival;bru0943384722;fao93766109;11:45' +
+  '+_Delayed_Arrival;hel7439299980;fao93766109;12:05' +
+  '+_Departure;fao93766109;lis2323639855;12:30';
+// 🔴 Delayed Departure from FAO to TXL (11h25)==>"_Delayed_Departure;fao93766109;txl2133758440;11:25"
+//              Arrival from BRU to FAO (11h45)==> _Arrival;bru0943384722;fao93766109;11:45
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+const getCode = str => str.toUpperCase().replace(/\d/g, '');
+
+const arr = flights.split('+');
+for (const flight of arr) {
+  const [type, from, to, time] = flight.split(';');
+
+  const name = type.replace(/_/g, ' ');
+  const flyFrom = getCode(from);
+  const flyTo = getCode(to);
+  const hour = time.replace(':', 'h');
+
+  const msg = `${
+    name.startsWith(' Delayed') ? '🔴' : ''
+  }${name} from ${flyFrom} to ${flyTo} (${hour})`;
+
+  console.log(msg.padStart(45, ' '));
+}
