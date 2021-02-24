@@ -31,6 +31,7 @@ createBooking('AB231', undefined, 1000); //{flightNum: "AB231", numPassengers: 1
  */
 
 //2️⃣ How passing arguments:primitive vs reference types
+/*
 const flight = 'AB123';
 const anush = {
   name: 'Anush Markosyan',
@@ -58,3 +59,23 @@ const newPassport = function (person) {
 newPassport(anush);
 checkIn(flight, anush);
 console.log(anush); //{name: "Ms. Ms. Anush Markosyan", passport: 14948769096}
+ */
+
+//3️⃣ Higher-order functions, functions that accept other function as input
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFistWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+//higher-order function
+const transformer = function (str, func) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${func(str)}`);
+
+};
+transformer('JavaScript is the best!', upperFistWord);
+transformer('JavaScript is the best!', oneWord);
