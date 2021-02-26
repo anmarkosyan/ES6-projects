@@ -61,7 +61,7 @@ checkIn(flight, anush);
 console.log(anush); //{name: "Ms. Ms. Anush Markosyan", passport: 14948769096}
  */
 
-//3️⃣ Higher-order functions, functions that accept other function as input
+//3️⃣ Higher-order functions, functions that accept callback function as an input
 const oneWord = function (str) {
   return str.replace(/ /g, '').toLowerCase();
 };
@@ -71,11 +71,22 @@ const upperFistWord = function (str) {
   return [first.toUpperCase(), ...others].join(' ');
 };
 
-//higher-order function
+//higher-order function using callback functions as an input
 const transformer = function (str, func) {
   console.log(`Original string: ${str}`);
   console.log(`Transformed string: ${func(str)}`);
 
+  //functions like objects can have methods and properties:
+  console.log(`Transformed by: ${func.name}`);
 };
 transformer('JavaScript is the best!', upperFistWord);
 transformer('JavaScript is the best!', oneWord);
+
+//📍exp
+const high5 = function () {
+  console.log(`🖐`);
+};
+//addEventListener=> higher-order function, give5 => callback function, which will call as soon as we click on the body
+document.body.addEventListener('click', high5);
+
+['Anush', 'Aram', 'Ararat'].forEach(high5);
