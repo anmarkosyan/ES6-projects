@@ -90,3 +90,20 @@ const high5 = function () {
 document.body.addEventListener('click', high5);
 
 ['Anush', 'Aram', 'Ararat'].forEach(high5);
+
+//4️⃣ Functions returning functions
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+//using arrow function
+const greet = greeting => name => console.log(`${greeting} ${name}`);
+
+const greeter = greet('Hey');
+greeter('Anush'); //Hey Anush
+greeter('Aram'); //Hey Aram
+greeter('Sarah'); // Hey Sarah
+//or
+greet('Hello')('Ann'); //Hello Ann
