@@ -108,7 +108,9 @@ greeter('Sarah'); // Hey Sarah
 //or
 greet('Hello')('Ann'); //Hello Ann
  */
+
 //5️⃣ The call and apply methods: which allows us  explicitly define the this keyword in any function that we want.
+
 const airline = {
   name: 'Armenian',
   numCode: 'AH',
@@ -116,9 +118,9 @@ const airline = {
   //book: function(){}
   book(flightNum, passName) {
     console.log(
-      `${passName} booked  seat on ${this.name} flight ${this.numCode} ${flightNum}`
+      `${passName} booked  seat on ${this.name} flight ${this.numCode}${flightNum}`
     );
-    this.booking.push({ flight: `${this.numCode} ${flightNum}`, passName });
+    this.booking.push({ flight: `${this.numCode}${flightNum}`, passName });
   },
 };
 
@@ -152,10 +154,23 @@ const swiss = {
 
 bookEuro.call(swiss, 876, 'Mary Cooper');
 
-
 //📍Apply method take an argument array
 const flightData = [342, 'Albert Cooper'];
 bookEuro.apply(swiss, flightData);
 //but we can also do like this, using spread operator
 bookEuro.call(swiss, ...flightData);
 console.log(swiss);
+
+//6️⃣ bind method: difference is that bind does not call functions immediately, but return new functions
+const bookEW = bookEuro.bind(euroWings); //return new function
+const bookSW = bookEuro.bind(swiss);
+const bookAir = bookEuro.bind(airline);
+bookEW(234, 'Tim'); //call the function
+bookSW(345, 'Timur');
+bookAir(456, 'Adam');
+
+//📍using bind arguments
+const bookEW23 = bookEuro.bind(euroWings, 23);
+bookEW23('Andrew');
+bookEW23('AnushMark');
+
