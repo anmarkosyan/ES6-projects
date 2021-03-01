@@ -60,7 +60,7 @@ newPassport(anush);
 checkIn(flight, anush);
 console.log(anush); //{name: "Ms. Ms. Anush Markosyan", passport: 14948769096}
  */
-
+/*
 //3️⃣ Higher-order functions, functions that accept callback function as an input
 const oneWord = function (str) {
   return str.replace(/ /g, '').toLowerCase();
@@ -107,3 +107,55 @@ greeter('Aram'); //Hey Aram
 greeter('Sarah'); // Hey Sarah
 //or
 greet('Hello')('Ann'); //Hello Ann
+ */
+//5️⃣ The call and apply methods: which allows us  explicitly define the this keyword in any function that we want.
+const airline = {
+  name: 'Armenian',
+  numCode: 'AH',
+  booking: [],
+  //book: function(){}
+  book(flightNum, passName) {
+    console.log(
+      `${passName} booked  seat on ${this.name} flight ${this.numCode} ${flightNum}`
+    );
+    this.booking.push({ flight: `${this.numCode} ${flightNum}`, passName });
+  },
+};
+
+airline.book(123, 'Anush Markosyan');
+airline.book(124, 'Aram Markosyan');
+console.log(airline.booking);
+
+const euroWings = {
+  name: 'Eurowings',
+  numCode: 'ER',
+  booking: [],
+};
+
+const bookEuro = airline.book;
+//❗️does not work
+//bookEuro(234, 'Sarah Conner');
+//Cannot read property 'planeName' of undefined => cannot read THIS, because now it is just a regular function
+
+//📍Call method
+bookEuro.call(euroWings, 123, 'Sarah Conner');
+console.log(euroWings);
+
+bookEuro.call(airline, 567, 'Stephan Spenser');
+console.log(airline);
+
+const swiss = {
+  name: 'Swiss Air Lines',
+  numCode: 'SW',
+  booking: [],
+};
+
+bookEuro.call(swiss, 876, 'Mary Cooper');
+
+
+//📍Apply method take an argument array
+const flightData = [342, 'Albert Cooper'];
+bookEuro.apply(swiss, flightData);
+//but we can also do like this, using spread operator
+bookEuro.call(swiss, ...flightData);
+console.log(swiss);
