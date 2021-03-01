@@ -123,7 +123,7 @@ const airline = {
     this.booking.push({ flight: `${this.numCode}${flightNum}`, passName });
   },
 };
-
+/*
 airline.book(123, 'Anush Markosyan');
 airline.book(124, 'Aram Markosyan');
 console.log(airline.booking);
@@ -162,6 +162,7 @@ bookEuro.call(swiss, ...flightData);
 console.log(swiss);
 
 //6️⃣ bind method: difference is that bind does not call functions immediately, but return new functions
+/*
 const bookEW = bookEuro.bind(euroWings); //return new function
 const bookSW = bookEuro.bind(swiss);
 const bookAir = bookEuro.bind(airline);
@@ -173,4 +174,43 @@ bookAir(456, 'Adam');
 const bookEW23 = bookEuro.bind(euroWings, 23);
 bookEW23('Andrew');
 bookEW23('AnushMark');
+ */
+
+
+//📍using object methods with eventListeners
+airline.planes = 300;
+airline.buyPlane = function () {
+  console.log(this);//{name: "Armenian", numCode: "AH", booking: Array(3), planes: 300, book: ƒ,…}
+
+  this.planes++;
+  console.log(this.planes);//301
+};
+
+//airline.buyPlane();
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', airline.buyPlane.bind(airline));//if don't use bind, this will point the buy bottom, as it call this method
+
+//📍About partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));//220
+
+const addVat = addTax.bind(null, 0.23);
+console.log(addVat(100));//123
+console.log(addVat(23));//28.29
+
+//📍The same problem function return function approach
+const addTax2 = rate => value => value + value * rate;
+
+const addVat2 = addTax2(0.23);
+console.log(addVat2(200));//246
+console.log(addVat2(100));//123
+console.log(addVat2(23));//28.29
+
+
+
+
+
+
 
