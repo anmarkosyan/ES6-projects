@@ -276,4 +276,4 @@ document
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
 poll.displayResults.call({ answers: [5, 2, 3] }); //[5, 2, 3]
-poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]}, 'string');//[1, 5, 3, 9, 6, 1] || with 'string' => Poll results are 1, 5, 3, 9, 6, 1
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string'); //[1, 5, 3, 9, 6, 1] || with 'string' => Poll results are 1, 5, 3, 9, 6, 1
