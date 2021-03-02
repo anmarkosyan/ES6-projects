@@ -98,7 +98,7 @@ document.body.addEventListener('click', high5);
 //   };
 // };
 
-//using arrow function
+//📍using arrow function
 const greet = greeting => name => console.log(`${greeting} ${name}`);
 
 const greeter = greet('Hey');
@@ -107,7 +107,31 @@ greeter('Aram'); //Hey Aram
 greeter('Sarah'); // Hey Sarah
 //or
 greet('Hello')('Ann'); //Hello Ann
+
+
  */
+//📍exp
+const sum = function (x, y) {
+  //1way
+  if( arguments.length === 2) {
+    return x + y
+  }else{
+    return function(y){
+      return x + y;
+    }
+  }
+  //2way
+  // if (y !== undefined) {
+  //   return x + y;
+  // } else {
+  //   return function (y) {
+  //     return x + y;
+  //   };
+  // }
+};
+
+console.log(sum(2, 3));// Outputs 5
+console.log(sum(2)(3)); // Outputs 5
 
 //5️⃣ The call and apply methods: which allows us  explicitly define the this keyword in any function that we want.
 
