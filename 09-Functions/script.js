@@ -235,7 +235,7 @@ This should be the default option. If type is 'string', display a string like "P
 HINT: Use many of the tools you learned about in this and the last section 😉
 
 BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option.
-Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
+Do NOT put the arrays in the poll object! So what should the this keyword look like in this situation?
 BONUS TEST DATA 1: [5, 2, 3]
 BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
@@ -244,10 +244,36 @@ GOOD LUCK 😀
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  answer: new Array(4).fill(0),
+  answers: new Array(4).fill(0), //[0, 0, 0, 0]
   registerNewAnswer() {
-    const [a, b, c, d] = this.options;
-    return prompt(`${this.question}\n${a}\n${b}\n${c}\n${d}\n(Write option number)`);
+    //get the answer
+    const input = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
+    //register answer in answer field
+    typeof input === 'number' &&
+      input < this.answers.length &&
+      this.answers[input]++;
+
+    //after call displayResult method in 2 ways
+    this.displayResults('string');
+    this.displayResults();
+  },
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`); //"Poll results are 13, 2, 4, 1".
+    }
   },
 };
-poll.registerNewAnswer();
+//poll.registerNewAnswer();
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({ answers: [5, 2, 3] }); //[5, 2, 3]
+poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]}, 'string');//[1, 5, 3, 9, 6, 1] || with 'string' => Poll results are 1, 5, 3, 9, 6, 1
