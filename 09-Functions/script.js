@@ -111,42 +111,43 @@ greet('Hello')('Ann'); //Hello Ann
 
  */
 //📍exp
-const sum = function (x, y) {
-  //1way
-  if( arguments.length === 2) {
-    return x + y
-  }else{
-    return function(y){
-      return x + y;
-    }
-  }
-  //2way
-  // if (y !== undefined) {
-  //   return x + y;
-  // } else {
-  //   return function (y) {
-  //     return x + y;
-  //   };
-  // }
-};
 
-console.log(sum(2, 3));// Outputs 5
-console.log(sum(2)(3)); // Outputs 5
+// const sum = function (x, y) {
+//   //1way
+//   if (arguments.length === 2) {
+//     return x + y;
+//   } else {
+//     return function (y) {
+//       return x + y;
+//     };
+//   }
+//   //2way
+//   // if (y !== undefined) {
+//   //   return x + y;
+//   // } else {
+//   //   return function (y) {
+//   //     return x + y;
+//   //   };
+//   // }
+// };
+//
+// console.log(sum(2, 3)); // Outputs 5
+// console.log(sum(2)(3)); // Outputs 5
 
 //5️⃣ The call and apply methods: which allows us  explicitly define the this keyword in any function that we want.
 
-const airline = {
-  name: 'Armenian',
-  numCode: 'AH',
-  booking: [],
-  //book: function(){}
-  book(flightNum, passName) {
-    console.log(
-      `${passName} booked  seat on ${this.name} flight ${this.numCode}${flightNum}`
-    );
-    this.booking.push({ flight: `${this.numCode}${flightNum}`, passName });
-  },
-};
+// const airline = {
+//   name: 'Armenian',
+//   numCode: 'AH',
+//   booking: [],
+//   //book: function(){}
+//   book(flightNum, passName) {
+//     console.log(
+//       `${passName} booked  seat on ${this.name} flight ${this.numCode}${flightNum}`
+//     );
+//     this.booking.push({ flight: `${this.numCode}${flightNum}`, passName });
+//   },
+// };
 /*
 airline.book(123, 'Anush Markosyan');
 airline.book(124, 'Aram Markosyan');
@@ -320,3 +321,16 @@ runOnce();
 (() => console.log('This will ALSO never run again!'))();
 
 runOnce();
+
+//📍exp from Simply technologies
+const obj = {
+  message: 'This is about invoked function!',
+  year: 2021,
+  innerMessage: function () {
+    (function () {
+      console.log(this.message);
+    })();
+  },
+};
+
+console.log(obj.innerMessage()); //undefined or Uncaught TypeError: Cannot read property 'message' of undefined
