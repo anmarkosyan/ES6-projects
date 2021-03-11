@@ -308,29 +308,93 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string'); //[1, 5, 3,
 
 //7️⃣ Immediately Invoked Function Expression(IIFE): which called only once
 // simple function expression, which can call again and again
-const runOnce = function () {
-  console.log('This will  run again!');
-};
-runOnce();
-
-//IIFE
-(function () {
-  console.log('This will never run again!');
-})();
-
-(() => console.log('This will ALSO never run again!'))();
-
-runOnce();
+// const runOnce = function () {
+//   console.log('This will  run again!');
+// };
+// runOnce();
+//
+// //IIFE
+// (function () {
+//   console.log('This will never run again!');
+// })();
+//
+// (() => console.log('This will ALSO never run again!'))();
+//
+// runOnce();
 
 //📍exp from Simply technologies
-const obj = {
-  message: 'This is about invoked function!',
-  year: 2021,
-  innerMessage: function () {
-    (function () {
-      console.log(this.message);
-    })();
-  },
+// const obj = {
+//   message: 'This is about invoked function!',
+//   year: 2021,
+//   innerMessage: function () {
+//     (function () {
+//       console.log(this.message);
+//     })();
+//   },
+// };
+//
+// console.log(obj.innerMessage()); //undefined or Uncaught TypeError: Cannot read property 'message' of undefined
+
+//8️⃣ Closures
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    if (passengerCount <= 3) {
+      console.log(`${passengerCount} passengers.`);
+    } else {
+      console.log('Sorry, there is no seats!');
+    }
+  };
 };
 
-console.log(obj.innerMessage()); //undefined or Uncaught TypeError: Cannot read property 'message' of undefined
+const booker = secureBooking();
+booker(); //1
+booker(); //2
+booker(); //3
+booker(); //sorry,...
+booker(); //sorry,...
+
+//❗️exp by Ruben
+/*
+let x = 7;
+function a(y) {
+  return x + y; // 7 + 4 = 11
+}
+
+function b(z) {
+  let x = 99;
+  return z(4); //=== a(y)
+}
+console.log(b(a)); //11
+
+ */
+//============
+
+function a(x) {
+  return b => {
+    x++;
+    return x + b;
+  };
+}
+const add = a(2);
+console.log(add(3)); //3 + 3 = 6
+console.log(add(4)); // 4 + 4 = 8
+console.log(add(6)); // 5 + 6 = 11
+//console.log(a(2)(3));
+
+//============
+// function a(x) {
+//   return function (y) {
+//     return function (z) {
+//       return x + y + z;
+//     };
+//   };
+// }
+// //use console.dir()  for see its parent function
+// console.dir(a); // will return a function
+// console.dir(a(2)); //will return a(x) function
+// console.log(a(2)(4)); // will return a(x)(y) function
+// console.log(a(2)(4)(6)); //12
