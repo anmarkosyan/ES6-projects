@@ -358,6 +358,7 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string'); //[1, 5, 3,
 // console.dir(booker);
 
 //📍 we don't need to return a function to see a closure in action
+/*
 let f;
 const g = function () {
   const a = 23;
@@ -379,6 +380,7 @@ f(); //46 => 23 * 2
 //re-assign f function
 h();
 f(); //88 => 44 * 2
+ */
 
 //🏋🏻‍♀️ timer example
 // const boardPassenger = function (n, wait) {
@@ -394,17 +396,16 @@ f(); //88 => 44 * 2
 // boardPassenger(120, 3);
 
 //🏋🏻‍♀️interviewer: what will the following code output?
-const arr = [10, 12, 15, 21];
-for (let i = 0; i < arr.length; i++) {
-  setTimeout(function () {
-    console.log('Index: ' + i + ', element: ' + arr[i]);
-  }, 3000);
-}
+// const arr = [10, 12, 15, 21];
+// for (let i = 0; i < arr.length; i++) {
+//   setTimeout(function () {
+//     console.log('Index: ' + i + ', element: ' + arr[i]);
+//   }, 3000);
+// }
 //Index: 0, element: 10 after 3 second
 //Index: 1, element: 12
 //Index: 2, element: 15
 //Index: 3, element: 21
-
 
 //🏋🏻‍♀️===== exp by Ruben
 /*
@@ -446,3 +447,30 @@ console.log(b(a)); //11
 // console.dir(a(2)); //will return a(x) function
 // console.log(a(2)(4)); // will return a(x)(y) function
 // console.log(a(2)(4)(6)); //12
+
+//🏋🏻‍♀️
+let countClick = 0;
+document.querySelector('.buy').addEventListener('click', function () {
+  alert(countClick++);
+});
+
+//🏋🏻‍♀️
+function multiply(a, b) {
+  if (arguments.length === 2) {
+    return function () {
+      console.log(a * b);
+    };
+  } else {
+    return function (b) {
+      console.log(a * b);
+    };
+  }
+}
+// console.log(multiply(4, 5)());//20
+// console.log(multiply(3, 3)());//9
+const multi = multiply(4, 5);
+multi();
+
+const double = multiply(2);
+double(5);
+double(11);
