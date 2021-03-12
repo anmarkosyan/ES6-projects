@@ -336,28 +336,77 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string'); //[1, 5, 3,
 // console.log(obj.innerMessage()); //undefined or Uncaught TypeError: Cannot read property 'message' of undefined
 
 //8️⃣ Closures
+// const secureBooking = function () {
+//   let passengerCount = 0;
+//
+//   return function () {
+//     passengerCount++;
+//     if (passengerCount <= 3) {
+//       console.log(`${passengerCount} passengers.`);
+//     } else {
+//       console.log('Sorry, there is no seats!');
+//     }
+//   };
+// };
+//
+// const booker = secureBooking();
+// booker(); //1
+// booker(); //2
+// booker(); //3
+// booker(); //sorry,...
+// booker(); //sorry,...
+// console.dir(booker);
 
-const secureBooking = function () {
-  let passengerCount = 0;
-
-  return function () {
-    passengerCount++;
-    if (passengerCount <= 3) {
-      console.log(`${passengerCount} passengers.`);
-    } else {
-      console.log('Sorry, there is no seats!');
-    }
+//📍 we don't need to return a function to see a closure in action
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
   };
 };
 
-const booker = secureBooking();
-booker(); //1
-booker(); //2
-booker(); //3
-booker(); //sorry,...
-booker(); //sorry,...
+const h = function () {
+  const z = 44;
+  f = function () {
+    console.log(z * 2);
+  };
+};
 
-//❗️exp by Ruben
+g();
+f(); //46 => 23 * 2
+
+//re-assign f function
+h();
+f(); //88 => 44 * 2
+
+//🏋🏻‍♀️ timer example
+// const boardPassenger = function (n, wait) {
+//   const perGroup = n / 3;
+//   console.log(`We will start boarding after ${wait} second!`);
+//
+//   setTimeout(function () {
+//     console.log(`We are now boarding all ${n} passengers.`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers.`);
+//   }, wait * 1000);
+// };
+// //const perGroup = 60 / 3;
+// boardPassenger(120, 3);
+
+//🏋🏻‍♀️interviewer: what will the following code output?
+const arr = [10, 12, 15, 21];
+for (let i = 0; i < arr.length; i++) {
+  setTimeout(function () {
+    console.log('Index: ' + i + ', element: ' + arr[i]);
+  }, 3000);
+}
+//Index: 0, element: 10 after 3 second
+//Index: 1, element: 12
+//Index: 2, element: 15
+//Index: 3, element: 21
+
+
+//🏋🏻‍♀️===== exp by Ruben
 /*
 let x = 7;
 function a(y) {
@@ -371,21 +420,20 @@ function b(z) {
 console.log(b(a)); //11
 
  */
-//============
-
-function a(x) {
-  return b => {
-    x++;
-    return x + b;
-  };
-}
-const add = a(2);
-console.log(add(3)); //3 + 3 = 6
-console.log(add(4)); // 4 + 4 = 8
-console.log(add(6)); // 5 + 6 = 11
+//🏋🏻‍♀️
+// function a(x) {
+//   return b => {
+//     x++;
+//     return x + b;
+//   };
+// }
+// const add = a(2);
+// console.log(add(3)); //3 + 3 = 6
+// console.log(add(4)); // 4 + 4 = 8
+// console.log(add(6)); // 5 + 6 = 11
 //console.log(a(2)(3));
 
-//============
+//🏋🏻‍♀️
 // function a(x) {
 //   return function (y) {
 //     return function (z) {
