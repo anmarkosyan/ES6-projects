@@ -1,8 +1,6 @@
 'use strict';
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// BANKIST APP
+//******************* 💲BANKIST APP ****************
 
 // Data
 const account1 = {
@@ -35,7 +33,7 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
-// Elements
+// Selectors
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
 const labelBalance = document.querySelector('.balance__value');
@@ -61,10 +59,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
+//**********
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -73,4 +68,27 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/////////////////////////////////////////////////
+//1️⃣  forEach method
+//with for of
+// for (const num of movements) {
+for (const [i, num] of movements.entries()) {
+  if (num > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${num}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(num)}`);
+  }
+  //2way
+  // num > 0
+  //   ? console.log(`You deposited ${num}`)
+  //   : console.log(`You withdrew ${Math.abs(num)}`);
+}
+
+console.log('----- forEach ------');
+
+//using forEach method => here forEach is a higher order function and inside a callback function
+movements.forEach(function (num, i) {
+  num > 0
+    ? console.log(`Movement ${i + 1}: You deposited ${num}`)
+    : console.log(`Movement ${i + 1}: You withdrew ${Math.abs(num)}`);
+  //if(num > 0) return `${i} hi`;// will not to work,we cannot break the forEach loop
+});
