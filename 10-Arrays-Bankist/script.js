@@ -59,17 +59,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-//**********
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
+//1️⃣  forEach method
+/*
+//with for... of
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-//1️⃣  forEach method
-//with for of
 // for (const num of movements) {
 for (const [i, num] of movements.entries()) {
   if (num > 0) {
@@ -86,9 +80,28 @@ for (const [i, num] of movements.entries()) {
 console.log('----- forEach ------');
 
 //using forEach method => here forEach is a higher order function and inside a callback function
-movements.forEach(function (num, i) {
+movements.forEach(function (num, i, arr) {
   num > 0
     ? console.log(`Movement ${i + 1}: You deposited ${num}`)
     : console.log(`Movement ${i + 1}: You withdrew ${Math.abs(num)}`);
   //if(num > 0) return `${i} hi`;// will not to work,we cannot break the forEach loop
+});
+*/
+
+//📍 forEach method with Map
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+//console.log(currencies); //{"USD" => "United States dollar", "EUR" => "Euro", "GBP" => "Pound sterling"}
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// with Set
+const currenciesUnique = new Set(['USA', 'EUR', 'USA', 'GBP', 'EUR']);
+//console.log(currenciesUnique);//{"USA", "EUR", "GBP"}
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
 });
