@@ -59,6 +59,7 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 //3️⃣ Functions
+//📍display movements
 const displayMovements = function (movArr) {
   //remove all previous data
   containerMovements.innerHTML = '';
@@ -81,6 +82,18 @@ const displayMovements = function (movArr) {
   });
 };
 displayMovements(account1.movements);
+
+//📍creat user names
+const createUserNames = function (accountArr) {
+  accountArr.forEach(function (account) {
+    account.userName = account.owner
+      .split(' ')
+      .map(el => el[0].toLowerCase())
+      .join('');
+  });
+};
+createUserNames(accounts);
+console.log(accounts);//added field with userName: "js", etc.
 
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
@@ -176,6 +189,7 @@ checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]); //
  */
 
 //2️⃣ map method
+/*
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const eurToUsd = 1.1;
 //📍
@@ -189,3 +203,27 @@ const msg = movements.map(
 );
 
 console.log(msg);
+
+//📍
+//const user = 'Steven Thomas Williams'; //stw
+
+//1way
+// const arr = user.toLowerCase().split(' ');
+// let userName = '';
+// for (const char of arr) {
+//   userName += char[0];
+// }
+
+//2way
+// let userName = '';
+// for (const char of user) {
+//   if (char === char.toUpperCase()) {
+//     userName += char.toLowerCase();
+//   }
+// }
+// console.log(userName.replace(/ /g, ''));
+
+//3way
+// const userName = user.split(' ').map(el => el[0].toLowerCase()).join('');
+// console.log(userName);
+ */
