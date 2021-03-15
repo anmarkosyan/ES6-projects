@@ -83,7 +83,7 @@ const displayMovements = function (movArr) {
 };
 displayMovements(account1.movements);
 
-//📍creat user names
+//📍creat userName field in each account obj with names first letters
 const createUserNames = function (accountArr) {
   accountArr.forEach(function (account) {
     account.userName = account.owner
@@ -93,7 +93,7 @@ const createUserNames = function (accountArr) {
   });
 };
 createUserNames(accounts);
-console.log(accounts);//added field with userName: "js", etc.
+//console.log(accounts);//added field with userName: "js", etc.
 
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
@@ -227,3 +227,10 @@ console.log(msg);
 // const userName = user.split(' ').map(el => el[0].toLowerCase()).join('');
 // console.log(userName);
  */
+
+//3️⃣ filter method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const deposits = movements.filter(el => el > 0);
+const withdrew = movements.filter(el => el < 0);
+console.log(deposits, withdrew);
