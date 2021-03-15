@@ -82,7 +82,7 @@ const displayMovements = function (movArr) {
 };
 displayMovements(account1.movements);
 
-//***************** Lecture part *************************
+//********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
 /*
 //with for... of
@@ -153,6 +153,7 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
+/*
 const checkDogs = function (dogsJulia, dogsKate) {
   //1way with slice
   // const selectDogs = dogsJulia.slice(1, -2);
@@ -172,3 +173,19 @@ const checkDogs = function (dogsJulia, dogsKate) {
 };
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]); //
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]); //
+ */
+
+//2️⃣ map method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+//📍
+const inUSD = movements.map(num => num * eurToUsd);
+console.log(inUSD);
+
+//📍
+const msg = movements.map(
+  (el, i) =>
+    `Movement ${i + 1}: You ${el > 0 ? 'deposit' : 'withdrew'} ${Math.abs(el)}`
+);
+
+console.log(msg);
