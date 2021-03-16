@@ -70,9 +70,7 @@ const displayMovements = function (movArr) {
 
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+        <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
@@ -81,25 +79,21 @@ const displayMovements = function (movArr) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+//displayMovements(account1.movements);
 
 //📍calc balance and print
 const calcBalance = function (movementsArr) {
   const balance = movementsArr.reduce((acc, dog) => acc + dog, 0);
   labelBalance.textContent = `${balance}€`;
 };
-calcBalance(account1.movements);
+//calcBalance(account1.movements);
 
 //📍 calc Summary in and out and print
 const calcSummary = function (movArr) {
-  const summaryIn = movArr
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
+  const summaryIn = movArr.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${summaryIn}€`;
 
-  const summaryOut = movArr
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
+  const summaryOut = movArr.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(summaryOut)}€`;
 
   const interest = movArr
@@ -112,7 +106,7 @@ const calcSummary = function (movArr) {
     .reduce((acc, deposit) => acc + deposit, 0);
   labelSumInterest.textContent = `${interest}€`;
 };
-calcSummary(account1.movements);
+//calcSummary(account1.movements);
 
 //📍creat userName field in each account obj with names first letters
 const createUserNames = function (accountArr) {
@@ -125,6 +119,31 @@ const createUserNames = function (accountArr) {
 };
 createUserNames(accounts);
 //console.log(accounts);//added field with userName: "js", etc.
+
+//4️⃣ Event handler
+let currentAccount;
+btnLogin.addEventListener('click', function (event) {
+  //prevent form from submitting
+  event.preventDefault();
+  //console.log('LOGIN')
+
+  currentAccount = accounts.find(acc => acc.userName === inputLoginUsername.value);
+  //console.log(currentAccount)
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //display UI and welcome massage
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = '100';
+
+    //display movements
+    displayMovements(currentAccount.movements);
+
+    //display balance
+    calcBalance(currentAccount.movements);
+
+    //display summery
+    calcSummary(currentAccount.movements);
+  }
+});
 
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
