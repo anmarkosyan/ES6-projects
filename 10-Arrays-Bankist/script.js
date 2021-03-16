@@ -73,7 +73,7 @@ const displayMovements = function (movArr) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}</div>
+        <div class="movements__value">${mov}€</div>
       </div>
     `;
 
@@ -89,6 +89,30 @@ const calcBalance = function (movementsArr) {
   labelBalance.textContent = `${balance}€`;
 };
 calcBalance(account1.movements);
+
+//📍 calc Summary in and out and print
+const calcSummary = function (movArr) {
+  const summaryIn = movArr
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${summaryIn}€`;
+
+  const summaryOut = movArr
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(summaryOut)}€`;
+
+  const interest = movArr
+    .filter(mov => mov > 0)
+    .map(num => (num * 1.2) / 100)
+    .filter((mov, i, arr) => {
+      //console.log(arr);// for checking previous operation/arr
+      return mov >= 1;
+    })
+    .reduce((acc, deposit) => acc + deposit, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcSummary(account1.movements);
 
 //📍creat userName field in each account obj with names first letters
 const createUserNames = function (accountArr) {
@@ -243,12 +267,13 @@ console.log(msg);
 // console.log(deposits, withdrew);
 
 //4️⃣ reduce method
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //accumulator => like SNOWBALL
 // const balance = movements.reduce((acc, cur) => acc + cur, 0);
 //console.log(balance);
 
 //📍 find maximum and minimum numbers using reduce method
+/*
 const max = movements.reduce((acc, dog) => {
   if (acc > dog) return acc;
   else return dog;
@@ -266,6 +291,7 @@ const min = movements.reduce(
   movements[0]
 );
 console.log(min); //-650
+ */
 
 //===================== 👩🏻‍💻 coding challenge N2 =======================
 /* 
@@ -285,7 +311,7 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
+/*
 const calcAverageHumanAge = function (dogsAgeArr) {
   const humanAge = dogsAgeArr.map(dogAge =>
     dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4
@@ -299,3 +325,13 @@ const calcAverageHumanAge = function (dogsAgeArr) {
 };
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])); //47
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])); //44
+ */
+
+//5️⃣ chaining methods
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eurToUSD = 1.1;
+// const res = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * eurToUSD)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(res);
