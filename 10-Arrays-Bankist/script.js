@@ -83,6 +83,13 @@ const displayMovements = function (movArr) {
 };
 displayMovements(account1.movements);
 
+//📍count balance and print
+const calcBalance = function (movementsArr) {
+  const balance = movementsArr.reduce((acc, num) => acc + num, 0);
+  labelBalance.textContent = `${balance}€`;
+};
+calcBalance(account1.movements);
+
 //📍creat userName field in each account obj with names first letters
 const createUserNames = function (accountArr) {
   accountArr.forEach(function (account) {
@@ -236,7 +243,7 @@ console.log(msg);
 // console.log(deposits, withdrew);
 
 //4️⃣ reduce method
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-//accumulator => like SNOWBALL
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balance);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// //accumulator => like SNOWBALL
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
+//console.log(balance);
