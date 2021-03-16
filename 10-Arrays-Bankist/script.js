@@ -83,7 +83,7 @@ const displayMovements = function (movArr) {
 };
 displayMovements(account1.movements);
 
-//📍count balance and print
+//📍calc balance and print
 const calcBalance = function (movementsArr) {
   const balance = movementsArr.reduce((acc, num) => acc + num, 0);
   labelBalance.textContent = `${balance}€`;
@@ -243,7 +243,26 @@ console.log(msg);
 // console.log(deposits, withdrew);
 
 //4️⃣ reduce method
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-// //accumulator => like SNOWBALL
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//accumulator => like SNOWBALL
 // const balance = movements.reduce((acc, cur) => acc + cur, 0);
 //console.log(balance);
+
+//📍 find maximum and minimum numbers using reduce method
+const max = movements.reduce((acc, num) => {
+  if (acc > num) return acc;
+  else return num;
+}, movements[0]);
+console.log(max);//3000
+
+const max1 = movements.reduce(
+  (acc, num) => (acc > num ? acc : num),
+  movements[0]
+);
+console.log(max1);//3000
+
+const min = movements.reduce(
+  (acc, num) => (acc < num ? acc : num),
+  movements[0]
+);
+console.log(min);//-650
