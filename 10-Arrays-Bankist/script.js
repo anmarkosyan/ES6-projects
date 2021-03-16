@@ -89,16 +89,16 @@ const calcBalance = function (movementsArr) {
 //calcBalance(account1.movements);
 
 //📍 calc Summary in and out and print
-const calcSummary = function (movArr) {
-  const summaryIn = movArr.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
+const calcSummary = function (currAcc) {
+  const summaryIn = currAcc.movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${summaryIn}€`;
 
-  const summaryOut = movArr.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
+  const summaryOut = currAcc.movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(summaryOut)}€`;
 
-  const interest = movArr
+  const interest = currAcc.movements
     .filter(mov => mov > 0)
-    .map(num => (num * 1.2) / 100)
+    .map(num => (num * currAcc.interestRate) / 100)
     .filter((mov, i, arr) => {
       //console.log(arr);// for checking previous operation/arr
       return mov >= 1;
@@ -122,6 +122,7 @@ createUserNames(accounts);
 
 //4️⃣ Event handler
 let currentAccount;
+
 btnLogin.addEventListener('click', function (event) {
   //prevent form from submitting
   event.preventDefault();
@@ -129,10 +130,14 @@ btnLogin.addEventListener('click', function (event) {
 
   currentAccount = accounts.find(acc => acc.userName === inputLoginUsername.value);
   //console.log(currentAccount)
+
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     //display UI and welcome massage
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = '100';
+
+    //clear fields
+    inputLoginUsername.value = inputLoginPin.value = '';
 
     //display movements
     displayMovements(currentAccount.movements);
@@ -141,7 +146,9 @@ btnLogin.addEventListener('click', function (event) {
     calcBalance(currentAccount.movements);
 
     //display summery
-    calcSummary(currentAccount.movements);
+    calcSummary(currentAccount);
+  }else{
+    alert('Wrong user name or pin. Please try again!')
   }
 });
 
