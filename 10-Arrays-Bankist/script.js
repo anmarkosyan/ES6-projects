@@ -229,8 +229,14 @@ console.log(msg);
  */
 
 //3️⃣ filter method
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//
+// const deposits = movements.filter(el => el > 0);
+// const withdrew = movements.filter(el => el < 0);
+// console.log(deposits, withdrew);
 
-const deposits = movements.filter(el => el > 0);
-const withdrew = movements.filter(el => el < 0);
-console.log(deposits, withdrew);
+//4️⃣ reduce method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//accumulator => like SNOWBALL
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance);
