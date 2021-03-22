@@ -82,9 +82,9 @@ const displayMovements = function (movArr) {
 //displayMovements(account1.movements);
 
 //📍calc balance and print
-const calcBalance = function (movementsArr) {
-  const balance = movementsArr.reduce((acc, dog) => acc + dog, 0);
-  labelBalance.textContent = `${balance}€`;
+const calcBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, dog) => acc + dog, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 //calcBalance(account1.movements);
 
@@ -120,13 +120,25 @@ const createUserNames = function (accountArr) {
 createUserNames(accounts);
 //console.log(accounts);//added field with userName: "js", etc.
 
+//📍 update UI
+const updateUI = function (acc) {
+  //display movements
+  displayMovements(acc.movements);
+
+  //display balance
+  calcBalance(acc);
+
+  //display summery
+  calcSummary(acc);
+};
+
 //4️⃣ Event handler
 let currentAccount;
 
+//📍LOGIN
 btnLogin.addEventListener('click', function (event) {
   //prevent form from submitting
   event.preventDefault();
-  //console.log('LOGIN')
 
   currentAccount = accounts.find(acc => acc.userName === inputLoginUsername.value);
   //console.log(currentAccount)
@@ -139,19 +151,30 @@ btnLogin.addEventListener('click', function (event) {
     //clear fields
     inputLoginUsername.value = inputLoginPin.value = '';
 
-    //display movements
-    displayMovements(currentAccount.movements);
-
-    //display balance
-    calcBalance(currentAccount.movements);
-
-    //display summery
-    calcSummary(currentAccount);
-  }else{
-    alert('Wrong user name or pin. Please try again!')
+    //update UI
+    updateUI(currentAccount);
   }
 });
 
+//📍 TRANSFER MONEY
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const receivedAccount = accounts.find(el => el.userName === inputTransferTo.value);
+  const amount = Number(inputTransferAmount.value);
+  //console.log(receivedAccount, amount);
+
+  //clear inputs
+  inputTransferTo.value = inputTransferAmount.value = '';
+
+  if (receivedAccount && amount > 0 && currentAccount.balance >= amount && receivedAccount.userName !== currentAccount.userName) {
+    //add negative movement to current user
+    currentAccount.movements.push(-amount);
+    //add positive movement to receiver
+    receivedAccount.movements.push(amount);
+    //update UI
+    updateUI(currentAccount);
+  }
+});
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
 /*
