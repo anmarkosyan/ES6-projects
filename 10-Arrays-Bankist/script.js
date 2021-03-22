@@ -153,6 +153,8 @@ btnLogin.addEventListener('click', function (event) {
 
     //update UI
     updateUI(currentAccount);
+  } else {
+    alert('Incorrect user name or pin! Please try again.');
   }
 });
 
@@ -173,6 +175,27 @@ btnTransfer.addEventListener('click', function (e) {
     receivedAccount.movements.push(amount);
     //update UI
     updateUI(currentAccount);
+  } else {
+    alert('Something went wrong, check the parameters!');
+  }
+});
+
+//📍LOAN REQUEST
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  //clear input
+  inputLoanAmount.value = '';
+
+  //check if any deposit >= 10% of request
+  if (amount > 0 && currentAccount.movements.some(num => num >= amount * 0.1)) {
+    //add movement
+    currentAccount.movements.push(amount);
+    //update UI
+    updateUI(currentAccount);
+  } else {
+    alert('Amount is not allowed! Check your movements.');
   }
 });
 
@@ -188,6 +211,8 @@ btnClose.addEventListener('click', function (e) {
     //hide UI
     containerApp.style.opacity = '0';
     //log out timer expires
+  } else {
+    alert('Incorrect user name or pin!');
   }
   //clear inputs
   inputCloseUsername.value = inputClosePin.value = '';
@@ -439,9 +464,8 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 // console.log(user);
 
 //7️⃣ some / every methods
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-console.log(movements.includes(-130));//true => only check for equality
-
-const deposit = movements.some(el => el > 0);
-console.log(deposit);// true => check for given condition
-
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements.includes(-130));//true => only check for equality
+//
+// const deposit = movements.some(el => el > 0);
+// console.log(deposit);// true => check for given condition
