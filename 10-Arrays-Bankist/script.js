@@ -192,6 +192,7 @@ btnClose.addEventListener('click', function (e) {
   //clear inputs
   inputCloseUsername.value = inputClosePin.value = '';
 });
+
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
 /*
@@ -436,3 +437,11 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 //   if (acc.owner === 'Jessica Davis') user = acc;
 // }
 // console.log(user);
+
+//7️⃣ some / every methods
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements.includes(-130));//true => only check for equality
+
+const deposit = movements.some(el => el > 0);
+console.log(deposit);// true => check for given condition
+
