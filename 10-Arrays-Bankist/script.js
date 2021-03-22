@@ -175,6 +175,23 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
+//📍 DELETE ACCOUNT
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //check if credentials are correct
+  if (inputCloseUsername.value === currentAccount.userName && Number(inputClosePin.value) === currentAccount.pin) {
+    //delete account
+    const closeAccIdx = accounts.findIndex(el => el.userName === currentAccount.userName);
+    accounts.splice(closeAccIdx, 1);
+    //hide UI
+    containerApp.style.opacity = '0';
+    //log out timer expires
+  }
+  //clear inputs
+  inputCloseUsername.value = inputClosePin.value = '';
+});
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
 /*
