@@ -469,3 +469,32 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 //
 // const deposit = movements.some(el => el > 0);
 // console.log(deposit);// true => check for given condition
+
+//8️⃣ flat methods => for removing the nested array and flattened the array
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
+console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const arrDeeper = [[[1, 2], 3], [[1], 2, 3], [3, 4], 5];// => work with nested arrays
+console.log(arrDeeper.flat()); //[Array(2), 3, Array(1), 2, 3, 3, 4, 5]
+console.log(arrDeeper.flat(2)); //[1, 2, 3, 1, 2, 3, 3, 4, 5]
+
+//📍
+console.log(accounts); //[{…}, {…}, {…}, {…}]
+// const accountMovements = accounts.map(acc => acc.movements);
+// const allMovementsArr = accountMovements.flat();//[200, 450, -400, 3000, -650, -130, 70, 1300, 5000, 3400, -150, -790, -3210, ...]
+// const balance = allMovementsArr.reduce((acc, num) => acc + num, 0);
+// console.log(balance);//17840
+
+//or with chaining
+const accountMovements = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(accountMovements);//17840
+
+//✅ flatMap method => which actually combine map + flat ,
+//❗ but with flatMap() we can go just 1 level depth, no 2 level
+const accountMovements2 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
+
+console.log(accountMovements2); //17840
