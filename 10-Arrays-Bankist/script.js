@@ -60,12 +60,15 @@ const accounts = [account1, account2, account3, account4];
 
 //3️⃣ Functions
 //📍display movements
-const displayMovements = function (movArr) {
+const displayMovements = function (movArr, sort = false) {
   //remove all previous data
   containerMovements.innerHTML = '';
 
+  //check sorting
+  const movements = sort ? movArr.slice().sort((a, b) => a - b) : movArr;
+
   //create new data for each array element
-  movArr.forEach(function (mov, i) {
+  movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -156,6 +159,14 @@ btnLogin.addEventListener('click', function (event) {
   } else {
     alert('Incorrect user name or pin! Please try again.');
   }
+});
+
+//📍SORT btn
+let sort = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sort);
+  sort = !sort;
 });
 
 //📍 TRANSFER MONEY
@@ -471,6 +482,7 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 // console.log(deposit);// true => check for given condition
 
 //8️⃣ flat methods => for removing the nested array and flattened the array
+/*
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
 console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -498,3 +510,17 @@ console.log(accountMovements);//17840
 const accountMovements2 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
 
 console.log(accountMovements2); //17840
+ */
+
+//9️⃣ sort method => ❗️does mutate original array
+//strings
+const owners = ['Zara', 'Emmi', 'Stevan', 'Adam'];
+const sortedName = owners.sort();
+console.log(sortedName); //["Adam", "Emmi", "Stevan", "Zara"]
+
+//numbers
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const ascendingOrder = movements.sort((a, b) => a - b);
+console.log(ascendingOrder);
+const descendingOrder = movements.sort((a, b) => b - a);
+console.log(descendingOrder);
