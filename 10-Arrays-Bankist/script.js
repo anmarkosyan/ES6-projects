@@ -513,6 +513,7 @@ console.log(accountMovements2); //17840
  */
 
 //9️⃣ sort method => ❗️does mutate original array
+/*
 //strings
 const owners = ['Zara', 'Emmi', 'Stevan', 'Adam'];
 const sortedName = owners.sort();
@@ -524,3 +525,35 @@ const ascendingOrder = movements.sort((a, b) => a - b);
 console.log(ascendingOrder);
 const descendingOrder = movements.sort((a, b) => b - a);
 console.log(descendingOrder);
+ */
+
+//🔟 new Array() constructor + fill method
+//ways to create an array
+console.log([1, 2, 3, 4]); //[1, 2, 3, 4]
+console.log(new Array(1, 2, 3, 4)); //[1, 2, 3, 4]
+
+const x = new Array(3);
+console.log(x); //[]
+console.log(x.fill(1)); //[1, 1, 1]
+console.log(x.fill(3, 1)); //[1, 3, 3]
+console.log(x.fill(5, 1, 2)); //[1, 5, 3]
+
+//📍 Array.from(arrayLike(iterable  = string, Map, Set), mapFn, thisArg)
+const b = Array.from({ length: 7 }, () => 1);
+console.log(b); //[1, 1, 1, 1, 1, 1, 1]
+
+const c = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(c); //[1, 2, 3, 4, 5, 6, 7]
+
+const str = Array.from('hello', char => char.toUpperCase());
+console.log(str); //["H", "E", "L", "L", "O"]
+
+//📌 print all movements in array, which stored in user interface
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+
+  //2 way
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')].map(el => Number(el.textContent.replace('€', '')));
+
+  console.log(movementsUI, movementsUI2); //[1300, 70, -130, -650, 3000, -400, 450, 200]
+});
