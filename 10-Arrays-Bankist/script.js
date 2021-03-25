@@ -546,8 +546,8 @@ console.log(b); //[1, 1, 1, 1, 1, 1, 1]
 const c = Array.from({ length: 7 }, (_, i) => i + 1);
 console.log(c); //[1, 2, 3, 4, 5, 6, 7]
 
-const str = Array.from('hello', char => char.toUpperCase());
-console.log(str); //["H", "E", "L", "L", "O"]
+const title = Array.from('hello', char => char.toUpperCase());
+console.log(title); //["H", "E", "L", "L", "O"]
 
 //📌 print all movements in array, which stored in user interface
 labelBalance.addEventListener('click', function () {
@@ -658,7 +658,7 @@ const numDepositsUpFrom1000 = accounts
 console.log(numDepositsUpFrom1000); //6
 
 //📍N3
-const {deposits, withdrawals} = accounts
+const { deposits, withdrawals } = accounts
   .flatMap(mov => mov.movements)
   .reduce(
     (sums, num) => {
@@ -668,4 +668,19 @@ const {deposits, withdrawals} = accounts
     },
     { deposits: 0, withdrawals: 0 }
   );
-console.log(deposits, withdrawals);
+console.log(deposits, withdrawals); //25180 -7340
+
+//📍N4
+//this is a nice title => This Is a Nice Title
+const capitalize = function (title) {
+  const exceptions = ['a', 'and', 'the', 'an', 'but', 'on', 'with', 'in'];
+  title = title.toLowerCase();
+  return title
+    .split(' ')
+    .map(el => (!exceptions.includes(el) ? el[0].toUpperCase() + el.slice(1) : el))
+    .join(' ');
+};
+
+console.log(capitalize('this is a nice title')); //This Is a Nice Title
+console.log(capitalize('this is a LONG title, but not too long'));
+console.log(capitalize('this is my first training about node.js and it amazing'));
