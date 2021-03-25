@@ -594,6 +594,7 @@ const dogs = [
 ];
 GOOD LUCK 😀
 */
+/*
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
@@ -636,3 +637,35 @@ console.log(normalEatingDog);
 //N8
 const sortFood = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(sortFood);
+ */
+
+//====================== 👩🏻‍💻  Array methods practice =======================
+console.log(accounts);
+
+//📍N1
+const bankDepositSum = accounts
+  .flatMap(mov => mov.movements)
+  .filter(dep => dep > 0)
+  .reduce((acc, num) => acc + num, 0);
+console.log(bankDepositSum);
+
+//📍N2
+const numDepositsUpFrom1000 = accounts
+  .flatMap(mov => mov.movements)
+  //.filter(dep => dep >= 1000).length
+  .reduce((count, num) => (num >= 1000 ? ++count : count), 0);
+
+console.log(numDepositsUpFrom1000); //6
+
+//📍N3
+const {deposits, withdrawals} = accounts
+  .flatMap(mov => mov.movements)
+  .reduce(
+    (sums, num) => {
+      //num > 0 ? (sums.deposits += num) : (sums.withdrawals += num);
+      sums[num > 0 ? 'deposits' : 'withdrawals'] += num;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log(deposits, withdrawals);
