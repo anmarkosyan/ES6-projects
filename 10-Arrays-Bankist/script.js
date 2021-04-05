@@ -1,7 +1,8 @@
 'use strict';
 
-//******************* 💲BANKIST APP part ****************
+//******************* 💲BANKER APP part ****************
 //1️⃣ Selectors
+/*
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
 const labelBalance = document.querySelector('.balance__value');
@@ -228,7 +229,7 @@ btnClose.addEventListener('click', function (e) {
   //clear inputs
   inputCloseUsername.value = inputClosePin.value = '';
 });
-
+*/
 //********************** 🔴 Lecture part *************************
 //1️⃣  forEach method
 /*
