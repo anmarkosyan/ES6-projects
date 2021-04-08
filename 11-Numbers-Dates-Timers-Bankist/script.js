@@ -279,6 +279,7 @@ console.log(Number.isSafeInteger(23/0));//false
  */
 
 //✅ working with Math operations
+/*
 // Math.sqrt()
 console.log(Math.sqrt(25)); //5
 console.log(25 ** (1 / 2)); //5 ===> square root
@@ -301,18 +302,20 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + mi
 console.log(randomInt(10, 20)); // 10 .... 20
 
 // rounding integers and all they have type coercion
-console.log(Math.round(23.4));//23
-console.log(Math.round('23.7'));//24 => will work, because of type coercion
+console.log(Math.round(23.4)); //23
+console.log(Math.round('23.7')); //24 => will work, because of type coercion
 
-console.log(Math.ceil(23.4));//24
-console.log(Math.ceil(23.7));//24
+console.log(Math.ceil(23.4)); //24
+console.log(Math.ceil(23.7)); //24
 
-console.log(Math.floor(23.4));//23
-console.log(Math.floor(23.8));//23
+console.log(Math.floor(23.4)); //23
+console.log(Math.floor(23.8)); //23
 
-console.log(Math.trunc(-1.3));//-1
-console.log(Math.floor(-1.3));//-2 => it's better to use floor instead of trunc
+console.log(Math.trunc(-1.3)); //-1
+console.log(Math.floor(-1.3)); //-2 => it's better to use floor instead of trunc
 
-
-
+// rounding decimals
+console.log((2.7).toFixed(0));//3 => return rounding number in string
+console.log(+(23.234).toFixed(2));//23.23 => converted to number
+ */
 
