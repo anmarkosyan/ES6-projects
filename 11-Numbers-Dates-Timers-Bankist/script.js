@@ -85,7 +85,7 @@ const displayMovements = function (movArr, sort = false) {
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -97,16 +97,16 @@ const displayMovements = function (movArr, sort = false) {
 //📍calc balance and print
 const calcBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, dog) => acc + dog, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 //📍 calc Summary in and out and print
 const calcSummary = function (currAcc) {
   const summaryIn = currAcc.movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${summaryIn}€`;
+  labelSumIn.textContent = `${summaryIn.toFixed(2)}€`;
 
   const summaryOut = currAcc.movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(summaryOut)}€`;
+  labelSumOut.textContent = `${Math.abs(summaryOut.toFixed(2))}€`;
 
   const interest = currAcc.movements
     .filter(mov => mov > 0)
@@ -116,7 +116,7 @@ const calcSummary = function (currAcc) {
       return mov >= 1;
     })
     .reduce((acc, deposit) => acc + deposit, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 //📍creat userName field in each account obj with names first letters
@@ -200,7 +200,7 @@ btnTransfer.addEventListener('click', function (e) {
 //📍LOAN REQUEST
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   //clear input
   inputLoanAmount.value = '';
