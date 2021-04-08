@@ -152,7 +152,7 @@ btnLogin.addEventListener('click', function (event) {
 
   currentAccount = accounts.find(acc => acc.userName === inputLoginUsername.value);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     //display UI and welcome massage
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = '100';
@@ -179,7 +179,7 @@ btnSort.addEventListener('click', function (e) {
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const receivedAccount = accounts.find(el => el.userName === inputTransferTo.value);
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   //console.log(receivedAccount, amount);
 
   //clear inputs
@@ -200,7 +200,7 @@ btnTransfer.addEventListener('click', function (e) {
 //📍LOAN REQUEST
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   //clear input
   inputLoanAmount.value = '';
@@ -221,7 +221,7 @@ btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
   //check if credentials are correct
-  if (inputCloseUsername.value === currentAccount.userName && Number(inputClosePin.value) === currentAccount.pin) {
+  if (inputCloseUsername.value === currentAccount.userName && +inputClosePin.value === currentAccount.pin) {
     //delete account
     const closeAccIdx = accounts.findIndex(el => el.userName === currentAccount.userName);
     accounts.splice(closeAccIdx, 1);
@@ -236,3 +236,44 @@ btnClose.addEventListener('click', function (e) {
 });
 
 //========================= 🔴 LECTURES PART =============================
+//❗️❗️In JS all numbers are represented internally as floating point numbers!!! Always as decimals!!!
+console.log(23 === 23.0); //true
+
+//Decimal base 10 => 0 to 9
+//Binary base 2 => 0 and 1
+console.log(0.1 + 0.2); //0.30000000000000004
+console.log(0.1 + 0.2 === 0.3); // false
+
+//📍string convert to number
+console.log(Number('12'));
+console.log(+'12.23'); //12.23
+console.log(+'12.3abc'); // NaN
+
+//✅ using parsing GLOBAL functions
+console.log(Number.parseInt('12.23abc', 10)); //12 => will return an integer
+console.log(Number.parseInt('e12.3abc', 10)); //NaN => string should start with number
+
+console.log(Number.parseFloat('    12.3abc    '));// 12.3 => ignore whitespaces
+console.log(Number.parseFloat('    12ert      '));// 12  => ignore whitespaces
+
+//console.log(parseInt('234fg'));//234 =====> will return the same result, but this is old-school way, without Number namespace
+
+//✅ checking if value is NaN
+console.log(Number.isNaN(123));//false
+console.log(Number.isNaN('123'));//false
+console.log(Number.isNaN(+'123er'));//true
+console.log(Number.isNaN(12/0));//false ❗️but 12/0 = infinity but here its check as an it is number
+
+//✅ best way of checking if value is number and there is no infinity number
+console.log(Number.isFinite(123));//true
+console.log(Number.isFinite('123'));//false
+console.log(Number.isFinite(+'1223cvb'));//false
+console.log(Number.isFinite(12/0));//false
+//also in this way we can check
+console.log(Number.isInteger(234));//true
+console.log(Number.isInteger(12.45));//true
+console.log(Number.isInteger('123'));//false
+console.log(Number.isInteger(23/0));//false
+console.log(Number.isSafeInteger(23/0));//false
+
+
