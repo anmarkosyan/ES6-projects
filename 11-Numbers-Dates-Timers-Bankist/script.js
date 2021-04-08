@@ -237,6 +237,7 @@ btnClose.addEventListener('click', function (e) {
 
 //========================= 🔴 LECTURES PART =============================
 //❗️❗️In JS all numbers are represented internally as floating point numbers!!! Always as decimals!!!
+/*
 console.log(23 === 23.0); //true
 
 //Decimal base 10 => 0 to 9
@@ -244,8 +245,8 @@ console.log(23 === 23.0); //true
 console.log(0.1 + 0.2); //0.30000000000000004
 console.log(0.1 + 0.2 === 0.3); // false
 
-//📍string convert to number
-console.log(Number('12'));
+//✅ string convert to number
+console.log(Number('12'));//12
 console.log(+'12.23'); //12.23
 console.log(+'12.3abc'); // NaN
 
@@ -275,5 +276,43 @@ console.log(Number.isInteger(12.45));//true
 console.log(Number.isInteger('123'));//false
 console.log(Number.isInteger(23/0));//false
 console.log(Number.isSafeInteger(23/0));//false
+ */
+
+//✅ working with Math operations
+// Math.sqrt()
+console.log(Math.sqrt(25)); //5
+console.log(25 ** (1 / 2)); //5 ===> square root
+console.log(8 ** (1 / 3)); //2 ===> cubic root
+
+// Math.max() / min()
+console.log(Math.max(2, 4, 6, 78, 90, 12)); //90
+console.log(Math.max(2, '23', 4, 3)); //23
+console.log(Math.max(2, '23ac', 56, 3)); //NaN
+
+console.log(Math.min(2, 4, 6, 78, 90, 12)); //2
+
+// Math.PI
+console.log(Math.PI * Number.parseFloat('10px') ** 2); //calculate area of circle  => 3.141592653589793(PI) * 10(radius) ** 2 = 314.1592653589793
+
+// Math.random() Math.trunc()
+console.log(Math.random()); // => random numbers between 0 and 1
+console.log(Math.trunc(Math.random() * 6) + 1); // => random numbers between 1 and 6
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min; // 0...1 -> 0...(max-min) + 1 -> min...max
+console.log(randomInt(10, 20)); // 10 .... 20
+
+// rounding integers and all they have type coercion
+console.log(Math.round(23.4));//23
+console.log(Math.round('23.7'));//24 => will work, because of type coercion
+
+console.log(Math.ceil(23.4));//24
+console.log(Math.ceil(23.7));//24
+
+console.log(Math.floor(23.4));//23
+console.log(Math.floor(23.8));//23
+
+console.log(Math.trunc(-1.3));//-1
+console.log(Math.floor(-1.3));//-2 => it's better to use floor instead of trunc
+
+
 
 
