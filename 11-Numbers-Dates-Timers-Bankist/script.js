@@ -318,4 +318,31 @@ console.log(Math.floor(-1.3)); //-2 => it's better to use floor instead of trunc
 console.log((2.7).toFixed(0));//3 => return rounding number in string
 console.log(+(23.234).toFixed(2));//23.23 => converted to number
  */
+//✅ Remainder operator => return remainder of a division
+console.log(5 % 2); // 1
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+//📌 check if number is even or odd or integer
+console.log(6 % 2 === 0); //true
+console.log(5 % 2 === 0); //false
+
+console.log('----------');
+const isEven = n => n % 2 === 0;
+const isOdd = n => n % 2 !== 0;
+const isInteger = n => n % 1 === 0;
+console.log(isEven(23)); //false
+console.log(isEven(52)); //true
+console.log(isOdd(23)); //true
+console.log(isOdd(154)); //false
+console.log(isInteger(12.3));//false
+console.log(isInteger(123));//true
+
+//📌exp:
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'red';
+    if (i % 3 === 0) row.style.backgroundColor = 'green';
+  });
+});
+
 
