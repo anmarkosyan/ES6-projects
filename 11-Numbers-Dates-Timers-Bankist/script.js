@@ -144,6 +144,18 @@ const updateUI = function (acc) {
 
 //4️⃣ Event handlers
 let currentAccount;
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = '100';
+
+//added current Date for current balance
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2, '0');
+const month = `${now.getMonth() + 1}`.padStart(2, '0');
+const year = now.getFullYear();
+const hour = now.getHours();
+const minute = now.getMinutes();
+labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minute}`;
 
 //📍LOGIN
 btnLogin.addEventListener('click', function (event) {
@@ -350,13 +362,13 @@ labelBalance.addEventListener('click', function () {
 
 //✅ Date => by using date constructor function
 //📌 Create a date  using 4 ways
-const now = new Date(); // => called as constructor and returns date object
-console.log(now); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
-console.log(typeof new Date()); //object
-
-const now1 = Date(); //called as function, and returns string
-console.log(now1); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
-console.log(typeof now1); //string
+// const now = new Date(); // => called as constructor and returns date object
+// console.log(now); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
+// console.log(typeof new Date()); //object
+//
+// const now1 = Date(); //called as function, and returns string
+// console.log(now1); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
+// console.log(typeof now1); //string
 
 //📌 parse the date from a date string
 // console.log(new Date('Apr 14 2021')); //Wed Apr 14 2021 00:00:00 GMT+0400 (Armenia Standard Time)
