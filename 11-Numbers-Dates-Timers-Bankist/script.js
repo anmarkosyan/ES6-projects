@@ -318,7 +318,9 @@ console.log(Math.floor(-1.3)); //-2 => it's better to use floor instead of trunc
 console.log((2.7).toFixed(0));//3 => return rounding number in string
 console.log(+(23.234).toFixed(2));//23.23 => converted to number
  */
+
 //✅ Remainder operator => return remainder of a division
+/*
 console.log(5 % 2); // 1
 console.log(5 / 2); // 5 = 2 * 2 + 1
 
@@ -344,5 +346,48 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'green';
   });
 });
+*/
 
+//✅ Date => by using date constructor function
+//📌 Create a date  using 4 ways
+const now = new Date(); // => called as constructor and returns date object
+console.log(now); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
+console.log(typeof new Date()); //object
 
+const now1 = Date(); //called as function, and returns string
+console.log(now1); //Sat Apr 17 2021 20:59:37 GMT+0400 (Armenia Standard Time)
+console.log(typeof now1); //string
+
+//📌 parse the date from a date string
+// console.log(new Date('Apr 14 2021')); //Wed Apr 14 2021 00:00:00 GMT+0400 (Armenia Standard Time)
+// console.log(new Date(account1.movementsDates[0])); //Tue Nov 19 2019 01:31:17 GMT+0400 (Armenia Standard Time)
+//
+// //📌by giving all parameters
+// console.log(new Date(2022, 11, 22, 6, 23, 3)); //Thu Dec 22 2022 06:23:03 GMT+0400 (Armenia Standard Time)
+// // =>UNIX TIME =>00
+// console.log(new Date(0));//Thu Jan 01 1970 04:00:00 GMT+0400 (Armenia Standard Time)
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));//Sun Jan 04 1970 04:00:00 GMT+0400 (Armenia Standard Time)
+
+//📌Dates are another special type of objects, and so they have their own methods
+// const future = new Date(2022, 11, 22, 6, 12);
+// console.log(future); //Thu Dec 22 2022 06:23:03 GMT+0400 (Armenia Standard Time)
+// console.log(future.getFullYear()); //2022 =>  typeof number
+// console.log(future.getMonth()); //11,=> but 12 should be, 0 base counting
+// console.log(future.getDate()); //22
+// console.log(future.getDay()); //4
+// console.log(future.getHours());
+// console.log(future.getMinutes());
+// console.log(future.getSeconds());
+// //📌 get timestamps and based on create a new date
+// console.log(future.getTime());//1671675120000
+// console.log(new Date(1671675120000));//Thu Dec 22 2022 06:12:00 GMT+0400 (Armenia Standard Time)
+
+// //📌 convert to string
+// console.log(future.toISOString());//2022-12-22T02:12:00.000Z
+
+// //📌 there is also set versions of all these methods
+// future.setFullYear(2023);
+// console.log(future); //Fri Dec 22 2023 06:12:00 GMT+0400 (Armenia Standard Time)
+//
+// //📌 using static method
+// console.log(Date.now()); //Sun Apr 18 2021 14:06:45 GMT+0400 (Armenia Standard Time)
