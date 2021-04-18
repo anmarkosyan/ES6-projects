@@ -14,9 +14,9 @@ const account1 = {
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2021-04-12T17:01:17.194Z',
+    '2021-04-16T23:36:17.929Z',
+    '2021-04-18T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -71,6 +71,20 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //3️⃣ Functions
+const formatMovementsDate = function (date) {
+  const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+  const daysPassed = calcDaysPassed(new Date(), date);
+  //console.log(daysPassed);
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  //else do bellow
+  const day = `${date.getDate()}`.padStart(2, '0');
+  const month = `${date.getMonth() + 1}`.padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 const displayMovements = function (acc, sort = false) {
   //remove all previous data
   containerMovements.innerHTML = '';
@@ -81,17 +95,15 @@ const displayMovements = function (acc, sort = false) {
   //create new data for each array element
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+    //create date field
     const date = new Date(acc.movementsDates[i]);
-    const day = `${date.getDate()}`.padStart(2, '0');
-    const month = `${date.getMonth() + 1}`.padStart(2, '0');
-    const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = formatMovementsDate(date);
 
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
         <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value">${mov.toFixed(2)}AMD</div>
       </div>
     `;
 
@@ -103,16 +115,16 @@ const displayMovements = function (acc, sort = false) {
 //📍calc balance and print
 const calcBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, dog) => acc + dog, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}AMD`;
 };
 
 //📍 calc Summary in and out and print
 const calcSummary = function (currAcc) {
   const summaryIn = currAcc.movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${summaryIn.toFixed(2)}€`;
+  labelSumIn.textContent = `${summaryIn.toFixed(2)}AMD`;
 
   const summaryOut = currAcc.movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(summaryOut.toFixed(2))}€`;
+  labelSumOut.textContent = `${Math.abs(summaryOut.toFixed(2))}AMD`;
 
   const interest = currAcc.movements
     .filter(mov => mov > 0)
@@ -122,7 +134,7 @@ const calcSummary = function (currAcc) {
       return mov >= 1;
     })
     .reduce((acc, deposit) => acc + deposit, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}AMD`;
 };
 
 //📍creat userName field in each account obj with names first letters
@@ -417,11 +429,11 @@ labelBalance.addEventListener('click', function () {
 // console.log(Date.now()); //Sun Apr 18 2021 14:06:45 GMT+0400 (Armenia Standard Time)
 
 //📌 doing calculations with dates
-const future1 = new Date(2022, 11, 22, 6, 12);
-console.log(future1); //Thu Dec 22 2022 06:12:00 GMT+0400 (Armenia Standard Time)
-console.log(+future1); //1671675120000 => converted to timestamp
-//EXP:find how many count of diff days
-const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
-
-const days1 = calcDaysPassed(new Date(2022, 11, 22), new Date(2022, 11, 3));
-console.log(days1);
+// const future1 = new Date(2022, 11, 22, 6, 12);
+// console.log(future1); //Thu Dec 22 2022 06:12:00 GMT+0400 (Armenia Standard Time)
+// console.log(+future1); //1671675120000 => converted to timestamp
+// //EXP:find how many count of diff days
+// const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+//
+// const days1 = calcDaysPassed(new Date(2022, 11, 22), new Date(2022, 11, 3));
+// console.log(days1);
