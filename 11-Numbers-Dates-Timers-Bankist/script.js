@@ -415,3 +415,13 @@ labelBalance.addEventListener('click', function () {
 //
 // //📌 using static method
 // console.log(Date.now()); //Sun Apr 18 2021 14:06:45 GMT+0400 (Armenia Standard Time)
+
+//📌 doing calculations with dates
+const future1 = new Date(2022, 11, 22, 6, 12);
+console.log(future1); //Thu Dec 22 2022 06:12:00 GMT+0400 (Armenia Standard Time)
+console.log(+future1); //1671675120000 => converted to timestamp
+//EXP:find how many count of diff days
+const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const days1 = calcDaysPassed(new Date(2022, 11, 22), new Date(2022, 11, 3));
+console.log(days1);
