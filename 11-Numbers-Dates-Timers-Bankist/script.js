@@ -86,6 +86,13 @@ const formatMovementsDate = function (date, locale) {
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
+const formatCurrency = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 const displayMovements = function (acc, sort = false) {
   //remove all previous data
   containerMovements.innerHTML = '';
@@ -100,11 +107,13 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementsDate(date, acc.locale);
 
+    const formatCur = formatCurrency(mov, acc.locale, acc.currency);
+
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
         <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}AMD</div>
+        <div class="movements__value">${formatCur}</div>
       </div>
     `;
 
@@ -116,16 +125,16 @@ const displayMovements = function (acc, sort = false) {
 //📍calc balance and print
 const calcBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, dog) => acc + dog, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}AMD`;
+  labelBalance.textContent = formatCurrency(acc.balance, acc.locale, acc.currency);
 };
 
 //📍 calc Summary in and out and print
 const calcSummary = function (currAcc) {
   const summaryIn = currAcc.movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${summaryIn.toFixed(2)}AMD`;
+  labelSumIn.textContent = formatCurrency(summaryIn, currAcc.locale, currAcc.currency);
 
   const summaryOut = currAcc.movements.filter(mov => mov < 0).reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(summaryOut.toFixed(2))}AMD`;
+  labelSumOut.textContent = formatCurrency(Math.abs(summaryOut), currAcc.locale, currAcc.currency);
 
   const interest = currAcc.movements
     .filter(mov => mov > 0)
@@ -135,7 +144,7 @@ const calcSummary = function (currAcc) {
       return mov >= 1;
     })
     .reduce((acc, deposit) => acc + deposit, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}AMD`;
+  labelSumInterest.textContent = formatCurrency(interest, currAcc.locale, currAcc.currency);
 };
 
 //📍creat userName field in each account obj with names first letters
@@ -450,22 +459,36 @@ labelBalance.addEventListener('click', function () {
 // console.log(days1);
 
 //✅ Internationalization API: Intl object
-const now = new Date();
-const formattedDate = new Intl.DateTimeFormat('arm-HY').format(now);
-console.log(formattedDate); // 4/18/2021
+//1️⃣ Internationalizing Dates (Intl)
+// const now = new Date();
+// const formattedDate = new Intl.DateTimeFormat('arm-HY').format(now);
+// console.log(formattedDate); // 4/18/2021
+//
+// //📌 setting options
+// const option = {
+//   hour: 'numeric',
+//   minute: 'numeric',
+//   day: 'numeric',
+//   month: 'long',
+//   year: 'numeric',
+//   weekday: 'short',
+// };
+// console.log(Intl.DateTimeFormat('fr-FR', option).format(now)); //lun. 19 avril 2021, 10:31
+//
+// //📌 will get user location from user's browser, will take browsers language
+// const locale = navigator.language;
+// console.log(locale); //en-US
+// console.log(Intl.DateTimeFormat(locale, option).format(now)); //Mon, April 19, 2021, 10:27 AM
 
-//📌 setting options
-const option = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  weekday: 'short',
-};
-console.log(Intl.DateTimeFormat('fr-FR', option).format(now)); //lun. 19 avril 2021, 10:31
-
-//📌 will get user location from user's browser, will take browsers language
-const locale = navigator.language;
-console.log(locale); //en-US
-console.log(Intl.DateTimeFormat(locale, option).format(now)); //Mon, April 19, 2021, 10:27 AM
+//2️⃣ Internationalizing Numbers (Intl)
+// const num = 2341267.89;
+// console.log('US:     ', new Intl.NumberFormat('en-US').format(num)); //2,341,267.89 => typeof string
+// console.log('GERMANY:', new Intl.NumberFormat('de-DE').format(num)); //GERMANY: 2.341.267,89
+// console.log('Syria:  ', new Intl.NumberFormat('ar-SY').format(num)); //Syria:   ٢٬٣٤١٬٢٦٧٫٨٩
+// console.log(navigator.language, new Intl.NumberFormat(navigator.language).format(num)); //en-US 2,341,267.89
+//
+// const options = {
+//   style: 'currency',
+//   currency: 'USD',
+// };
+// console.log('US:     ', new Intl.NumberFormat('en-US', options).format(num));
