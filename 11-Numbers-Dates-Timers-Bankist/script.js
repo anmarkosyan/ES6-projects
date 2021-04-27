@@ -170,11 +170,39 @@ const updateUI = function (acc) {
   calcSummary(acc);
 };
 
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, '0'); //1.66666
+    const sec = String(Math.trunc(time % 60)).padStart(2, '0'); //40
+    //in each call, print remaindering time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //when 0 seconds log out the user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started!`;
+      containerApp.style.opacity = '0';
+    }
+    //decrease time -1
+    time--;
+  };
+
+  //set time to 5 minutes
+  let time = 10;
+
+  //call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 //4️⃣ Event handlers
-let currentAccount;
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = '100';
+let currentAccount, timer;
+
+//FAKE always logged in
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = '100';
 
 //📍LOGIN
 btnLogin.addEventListener('click', function (event) {
@@ -210,10 +238,14 @@ btnLogin.addEventListener('click', function (event) {
     //clear fields
     inputLoginUsername.value = inputLoginPin.value = '';
 
+    //update timer
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
+
     //update UI
     updateUI(currentAccount);
   } else {
-    alert('Incorrect user name or pin! Please try again.');
+    alert('Incorrect user name or pin! Please, try again.');
   }
 });
 
@@ -244,8 +276,13 @@ btnTransfer.addEventListener('click', function (e) {
     //add transfer date
     currentAccount.movementsDates.push(new Date().toISOString());
     receivedAccount.movementsDates.push(new Date().toISOString());
+
     //update UI
     updateUI(currentAccount);
+
+    //reset the timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   } else {
     alert('Something went wrong, check the parameters!');
   }
@@ -269,6 +306,10 @@ btnLoan.addEventListener('click', function (e) {
 
       //update UI
       updateUI(currentAccount);
+
+      //reset timer
+      clearInterval(timer);
+      timer = startLogoutTimer();
     }, 2500);
   } else {
     alert('Amount is not allowed! Check your movements.');
@@ -497,7 +538,7 @@ labelBalance.addEventListener('click', function () {
 // console.log('US:     ', new Intl.NumberFormat('en-US', options).format(num));
 
 //✅ Timers:
-//1️⃣ setTimeout
+//1️⃣ setTimeout will run only once
 //They are used to schedule the execution of functions.
 //They are part of window object, and inside of both timers THIS will point of window
 
@@ -512,6 +553,7 @@ labelBalance.addEventListener('click', function () {
 // if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);// nothing will execute
 
 //exp:
+/*
 const log = console.log;
 
 function printStatement() {
@@ -540,5 +582,24 @@ const multiplyByTwo = function (num) {
 
 setTimeout(multiplyByTwo, 1500, 5);
 
+//------
+const arrOfNums = [1, 2, 3, 4];
 
+for (let i = 0; i < arrOfNums.length; i++) {
+  setTimeout(function () {
+    log(`Value of ${i}: ${arrOfNums[i]}`);
+  }, 2000);
+}
+ */
 
+//2️⃣ setInterval will keep running forever until we stop it
+//create a clock
+// setInterval(() => {
+//   const now = new Date();
+//   // const hour =  now.getHours();
+//   // const min = now.getMinutes();
+//   // const sec = now.getSeconds();
+//   // console.log(`${hour}:${min}:${sec}`);
+//
+//   console.log(new Intl.DateTimeFormat(navigator.language, { hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(now));
+// }, 1000);
