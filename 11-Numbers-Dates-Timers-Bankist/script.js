@@ -261,12 +261,15 @@ btnLoan.addEventListener('click', function (e) {
 
   //check if any deposit >= 10% of request
   if (amount > 0 && currentAccount.movements.some(num => num >= amount * 0.1)) {
-    //add movement
-    currentAccount.movements.push(amount);
-    //add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    //update UI
-    updateUI(currentAccount);
+    setTimeout(function () {
+      //add movement
+      currentAccount.movements.push(amount);
+      //add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
+
+      //update UI
+      updateUI(currentAccount);
+    }, 2500);
   } else {
     alert('Amount is not allowed! Check your movements.');
   }
@@ -492,3 +495,50 @@ labelBalance.addEventListener('click', function () {
 //   currency: 'USD',
 // };
 // console.log('US:     ', new Intl.NumberFormat('en-US', options).format(num));
+
+//✅ Timers:
+//1️⃣ setTimeout
+//They are used to schedule the execution of functions.
+//They are part of window object, and inside of both timers THIS will point of window
+
+//setTimeout(() => console.log('Here is your pizza 🍕'), 3000);
+
+// const ingredients = ['olive', 'spinach'];
+// const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`), 3000, ...ingredients);
+//
+// console.log('1 will execute...');
+//
+// //stop timer by using clearTimeout
+// if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);// nothing will execute
+
+//exp:
+const log = console.log;
+
+function printStatement() {
+  log('Will be printed after 3000 milliseconds');
+}
+
+setTimeout(printStatement, 3000);
+
+//-----
+setTimeout(function () {
+  log('Will be printed after 2000 millisecond');
+}, 2000);
+
+//======
+setTimeout(function () {
+  log('Will be printed after 0 milliseconds');
+}, 0); //after
+
+//=======
+log('Will be the first print'); //always the first
+
+//📍passing parameters =>  Syntax -> setTimeout(callbackMethod, delay, param1, param2, ..)
+const multiplyByTwo = function (num) {
+  log(`${num} multiply by two is ${num * 2}`);
+};
+
+setTimeout(multiplyByTwo, 1500, 5);
+
+
+
