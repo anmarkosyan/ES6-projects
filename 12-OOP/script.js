@@ -1,7 +1,7 @@
 'use strict';
 //======================== 🔴 lecture part ==================
-// const Person = function (firstName, birthYear) {
-//   this.firstName = firstName;
+// const Person = function (fullName, birthYear) {
+//   this.fullName = fullName;
 //   this.birthYear = birthYear;
 // };
 //
@@ -35,46 +35,69 @@
 //   constructor() {}
 // };
 //class declaration
-/*
+
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   //method will be added to .prototype property
   calcAge() {
     console.log(2021 - this.birthYear);
   }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2021 - this.birthYear;
+  }
+  //set a property that already exist
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else console.log(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
-const agata = new PersonCl('Agata', 1991);
-console.log(agata); //PersonCl { firstName: 'Agata', birthYear: 1991 }
+const agata = new PersonCl('Agata Marks', 1986);
+console.log(agata); //PersonCl { fullName: 'Agata', birthYear: 1991 }
 agata.calcAge(); //30
-console.log(agata.__proto__ === PersonCl.prototype); //true
-console.log(agata.hasOwnProperty('calcAge')); //false
+agata.greet(); //Hey Agata
+console.log(agata.age);
+console.log(agata.fullName);
 
-for (const agataKey in agata) {
-  console.log(agataKey); // firstName birthYear
-}
-console.log(Object.getOwnPropertyDescriptor(agata.__proto__, 'calcAge'));
- */
+const harout = new PersonCl('Harout Spenser', 1991);
+console.log(harout);
+console.log(harout.fullName); //Harout Spenser
+
+// console.log(agata.__proto__ === PersonCl.prototype); //true
+// console.log(agata.hasOwnProperty('calcAge')); //false
+// for (const agataKey in agata) {
+//   console.log(agataKey); // fullName birthYear
+// }
+// console.log(Object.getOwnPropertyDescriptor(agata.__proto__, 'calcAge'));
 
 //📍 getter and setter functions
-const account = {
-  owner: 'John',
-  movements: [12, 45, 23, 78],
-
-  get latest() {
-    return this.movements.slice(-1).pop();
-  },
-  set latest(mov) {
-    this.movements.push(mov);
-  },
-};
-
-console.log(account.latest);//78
-account.latest = 100;
-console.log(account.movements);
+// const account = {
+//   owner: 'John',
+//   movements: [12, 45, 23, 78],
+//
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
+// };
+//
+// console.log(account.latest); //78
+// account.latest = 100;
+// console.log(account.movements);
 
 //=========================== 🔴 coding challenge ===================
 /*
