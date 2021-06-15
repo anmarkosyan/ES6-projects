@@ -41,7 +41,8 @@ class PersonCl {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
-  //method will be added to .prototype property
+
+  //instance methods => method will be added to .prototype property
   calcAge() {
     console.log(2021 - this.birthYear);
   }
@@ -62,6 +63,11 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+  //static method => method wil be attached constructor function itself
+  static color() {
+    console.log('green');
+    console.log(this);
+  }
 }
 
 const agata = new PersonCl('Agata Marks', 1986);
@@ -70,6 +76,8 @@ agata.calcAge(); //30
 agata.greet(); //Hey Agata
 console.log(agata.age);
 console.log(agata.fullName);
+PersonCl.color();
+
 
 const harout = new PersonCl('Harout Spenser', 1991);
 console.log(harout);
@@ -118,10 +126,6 @@ GOOD LUCK 😀
 // function Car(make, speed) {
 //   this.make = make;
 //   this.speed = speed;
-//
-//   this.age = function(){
-//     return 34;
-//   }
 // }
 //
 // Car.prototype.accelerate = function () {
@@ -134,12 +138,19 @@ GOOD LUCK 😀
 //   console.log(`${this.make} going at ${this.speed} km/h`);
 // };
 //
+// //creating static method
+// Car.color = function () {
+//   console.log('Black 🚙');
+//   console.log(this);
+// };
+//
 // const car1 = new Car('BMW', 120);
 // const car2 = new Car('Mercedes', 95);
-// console.log(car1)//Car { make: 'BMW', speed: 120 }
-// console.log(car1.hasOwnProperty('brake'));//false
-// console.log(car1.hasOwnProperty('make'));//true
-//
+// console.log(car1); //Car { make: 'BMW', speed: 120 }
+// console.log(car1.hasOwnProperty('brake')); //false
+// console.log(car1.hasOwnProperty('make')); //true
+// Car.color();
+
 // for(let key in car1){
 //   console.log(key);
 // }
