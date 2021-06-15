@@ -81,22 +81,6 @@
 // console.log(harout);
 // console.log(harout.fullName); //Harout Spenser
 
-//📍 Object.creat() function on any object literals
-const PersonProto = {
-  getAge() {
-    console.log(2021 - this.birthYear);
-  },
-  about(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-const aram = Object.create(PersonProto);
-aram.about('Aram', 1985);
-aram.getAge();
-console.log(aram); //{ firstName: 'Aram', birthYear: 1985 }
-console.log(aram.__proto__ === PersonProto); //true
-
 // console.log(agata.__proto__ === PersonCl.prototype); //true
 // console.log(agata.hasOwnProperty('calcAge')); //false
 // for (const agataKey in agata) {
@@ -120,6 +104,59 @@ console.log(aram.__proto__ === PersonProto); //true
 // console.log(account.latest); //78
 // account.latest = 100;
 // console.log(account.movements);
+
+//📍 Object.creat() function on any object literals
+// const PersonProto = {
+//   getAge() {
+//     console.log(2021 - this.birthYear);
+//   },
+//   about(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+// const aram = Object.create(PersonProto);
+// aram.about('Aram', 1985);
+// aram.getAge();
+// console.log(aram); //{ firstName: 'Aram', birthYear: 1985 }
+// console.log(aram.__proto__ === PersonProto); //true
+
+//📍 Inheritance between classes(parent and child) => constructor functions
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2021 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+//linked the prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is  ${this.firstName}, I am a ${this.course} developer`);
+};
+
+const anush = new Student('Anush', 1991, 'node.js');
+console.log(anush);
+anush.introduce();
+anush.calcAge();//30
+
+console.log(anush instanceof Student);//true
+console.log(anush instanceof Person);//true
+console.log(anush instanceof Object);//true
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+console.log(anush.__proto__);//Student.prototype
+console.log(anush.__proto__.__proto__);//Person.prototype
+console.log(anush.__proto__.__proto__.__proto__);//Object.prototype
+
 
 //=========================== 🔴 coding challenge ===================
 /*
@@ -175,7 +212,7 @@ GOOD LUCK 😀
 // car2.accelerate();
 // car2.brake();
 
-//2️⃣
+//2️⃣ using ES class
 /*
 1. Re-create challenge 1, but this time using an ES6 class;
 2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
@@ -186,6 +223,7 @@ GOOD LUCK 😀
 DATA CAR 1: 'Ford' going at 120 km/h
 GOOD LUCK 😀
 */
+/*
 class Car {
   constructor(make, speed) {
     this.make = make;
@@ -218,3 +256,4 @@ car1.accelerate();
 car1.brake();
 car1.speedUs = 20;
 console.log(car1);
+ */
