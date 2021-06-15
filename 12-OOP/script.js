@@ -35,6 +35,7 @@
 //   constructor() {}
 // };
 //class declaration
+/*
 class PersonCl {
   constructor(firstName, birthYear) {
     this.firstName = firstName;
@@ -55,6 +56,25 @@ console.log(agata.hasOwnProperty('calcAge')); //false
 for (const agataKey in agata) {
   console.log(agataKey); // firstName birthYear
 }
+console.log(Object.getOwnPropertyDescriptor(agata.__proto__, 'calcAge'));
+ */
+
+//📍 getter and setter functions
+const account = {
+  owner: 'John',
+  movements: [12, 45, 23, 78],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);//78
+account.latest = 100;
+console.log(account.movements);
 
 //=========================== 🔴 coding challenge ===================
 /*
