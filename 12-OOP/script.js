@@ -35,53 +35,67 @@
 //   constructor() {}
 // };
 //class declaration
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//
+//   //instance methods => method will be added to .prototype property
+//   calcAge() {
+//     console.log(2021 - this.birthYear);
+//   }
+//
+//   greet() {
+//     console.log(`Hey ${this.fullName}`);
+//   }
+//
+//   get age() {
+//     return 2021 - this.birthYear;
+//   }
+//   //set a property that already exist
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else console.log(`${name} is not a full name`);
+//   }
+//
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   //static method => method wil be attached constructor function itself
+//   static color() {
+//     console.log('green');
+//     console.log(this);
+//   }
+// }
+//
+// const agata = new PersonCl('Agata Marks', 1986);
+// console.log(agata); //PersonCl { fullName: 'Agata', birthYear: 1991 }
+// agata.calcAge(); //30
+// agata.greet(); //Hey Agata
+// console.log(agata.age);
+// console.log(agata.fullName);
+// PersonCl.color();
+//
+// const harout = new PersonCl('Harout Spenser', 1991);
+// console.log(harout);
+// console.log(harout.fullName); //Harout Spenser
 
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-
-  //instance methods => method will be added to .prototype property
-  calcAge() {
+//📍 Object.creat() function on any object literals
+const PersonProto = {
+  getAge() {
     console.log(2021 - this.birthYear);
-  }
-
-  greet() {
-    console.log(`Hey ${this.fullName}`);
-  }
-
-  get age() {
-    return 2021 - this.birthYear;
-  }
-  //set a property that already exist
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else console.log(`${name} is not a full name`);
-  }
-
-  get fullName() {
-    return this._fullName;
-  }
-  //static method => method wil be attached constructor function itself
-  static color() {
-    console.log('green');
-    console.log(this);
-  }
-}
-
-const agata = new PersonCl('Agata Marks', 1986);
-console.log(agata); //PersonCl { fullName: 'Agata', birthYear: 1991 }
-agata.calcAge(); //30
-agata.greet(); //Hey Agata
-console.log(agata.age);
-console.log(agata.fullName);
-PersonCl.color();
-
-
-const harout = new PersonCl('Harout Spenser', 1991);
-console.log(harout);
-console.log(harout.fullName); //Harout Spenser
+  },
+  about(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const aram = Object.create(PersonProto);
+aram.about('Aram', 1985);
+aram.getAge();
+console.log(aram); //{ firstName: 'Aram', birthYear: 1985 }
+console.log(aram.__proto__ === PersonProto); //true
 
 // console.log(agata.__proto__ === PersonCl.prototype); //true
 // console.log(agata.hasOwnProperty('calcAge')); //false
@@ -160,3 +174,47 @@ GOOD LUCK 😀
 // car2.accelerate();
 // car2.accelerate();
 // car2.brake();
+
+//2️⃣
+/*
+1. Re-create challenge 1, but this time using an ES6 class;
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, 
+   by multiplying the input by 1.6);
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 km/h
+GOOD LUCK 😀
+*/
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} going at ${this.speed} km/h`);
+  }
+
+  get speedUs() {
+    return this.speed / 1.6;
+  }
+
+  set speedUs(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const car1 = new Car('Ford', 120);
+console.log(car1.speedUs);
+car1.accelerate();
+car1.accelerate();
+car1.brake();
+car1.speedUs = 20;
+console.log(car1);
