@@ -1,5 +1,5 @@
 'use strict';
-
+//======================== 🔴 lecture part ==================
 // const Person = function (firstName, birthYear) {
 //   this.firstName = firstName;
 //   this.birthYear = birthYear;
@@ -23,9 +23,40 @@
 // anush.calcAge();
 // console.log(anush.__proto__);
 // console.log(Person.prototype.isPrototypeOf(anush)); //true
-// console.log(Person.prototype.isPrototypeOf(Person)); //false
+// console.log(Person.prototype.isPrototypeOf(Pers on)); //false
+//📍ES6 ====> CLASSES
+//1️⃣ classes are not hoisted
+//2️⃣ Classes are first-class citizens =>we can pass them
+//into functions and also return them from functions.
+//3️⃣ the body of a class is always executed in strict mode
 
-//============== coding challenge ============
+//class expression
+// const PersonExp = class {
+//   constructor() {}
+// };
+//class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  //method will be added to .prototype property
+  calcAge() {
+    console.log(2021 - this.birthYear);
+  }
+}
+
+const agata = new PersonCl('Agata', 1991);
+console.log(agata); //PersonCl { firstName: 'Agata', birthYear: 1991 }
+agata.calcAge(); //30
+console.log(agata.__proto__ === PersonCl.prototype); //true
+console.log(agata.hasOwnProperty('calcAge')); //false
+
+for (const agataKey in agata) {
+  console.log(agataKey); // firstName birthYear
+}
+
+//=========================== 🔴 coding challenge ===================
 /*
 1. Use a constructor function to implement a Car. A car has a make and a speed property.
    The speed property is the current speed of the car in km/h;
@@ -41,27 +72,37 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 GOOD LUCK 😀
 */
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
-
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(`${this.make} going at ${this.speed} km/h`);
-};
-
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} going at ${this.speed} km/h`);
-};
-
-const car1 = new Car('BMW', 120);
-const car2 = new Car('Mercedes', 95);
-
-car1.accelerate();
-car1.accelerate();
-car1.brake();
-car2.accelerate();
-car2.accelerate();
-car2.brake();
+// function Car(make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+//
+//   this.age = function(){
+//     return 34;
+//   }
+// }
+//
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} going at ${this.speed} km/h`);
+// };
+//
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} going at ${this.speed} km/h`);
+// };
+//
+// const car1 = new Car('BMW', 120);
+// const car2 = new Car('Mercedes', 95);
+// console.log(car1)//Car { make: 'BMW', speed: 120 }
+// console.log(car1.hasOwnProperty('brake'));//false
+// console.log(car1.hasOwnProperty('make'));//true
+//
+// for(let key in car1){
+//   console.log(key);
+// }
+// car1.accelerate();
+// car1.accelerate();
+// car1.brake();
+// car2.accelerate();
+// car2.accelerate();
+// car2.brake();
