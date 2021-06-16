@@ -157,6 +157,34 @@
 // console.log(anush.__proto__.__proto__); //Person.prototype
 // console.log(anush.__proto__.__proto__.__proto__); //Object.prototype
 
+//📍 Class inheritance
+class Person {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+
+  calcAge() {
+    console.log(2021 - this.year);
+  }
+
+  greet() {
+    console.log(`Hello ${this.name}`);
+  }
+}
+
+class Student extends Person {
+  constructor(name, year, course) {
+    super(name, year);
+    this.course = course;
+  }
+}
+const mike = new Student('Mike', 1986, 'Node.js');
+console.log(mike);
+mike.greet();
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
 //=========================== 🔴 coding challenge ===================
 /*
 1. Use a constructor function to implement a Car. A car has a make and a speed property.
@@ -270,7 +298,7 @@ console.log(car1);
 DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 GOOD LUCK 😀
 */
-
+/*
 function Car(make, speed) {
   this.make = make;
   this.speed = speed;
@@ -310,3 +338,4 @@ tesla.accelerate();
 tesla.accelerate();
 tesla.brake()
 tesla.accelerate();
+ */
