@@ -1,4 +1,3 @@
-'use strict';
 //======================== 🔴 lecture part ==================
 // const Person = function (fullName, birthYear) {
 //   this.fullName = fullName;
@@ -158,32 +157,44 @@
 // console.log(anush.__proto__.__proto__.__proto__); //Object.prototype
 
 //📍 Class inheritance
-class Person {
-  constructor(name, year) {
-    this.name = name;
-    this.year = year;
-  }
+// class Person {
+//   constructor(name, year) {
+//     this.name = name;
+//     this.year = year;
+//   }
+//
+//   calcAge() {
+//     console.log(2021 - this.year);
+//   }
+//
+//   greet() {
+//     console.log(`Hello ${this.name}`);
+//   }
+// }
+//
+// class Student extends Person {
+//   constructor(name, year, course) {
+//     super(name, year);
+//     this.course = course;
+//   }
+// }
+// const mike = new Student('Mike', 1986, 'Node.js');
+// console.log(mike);
+// mike.greet();
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
+//📍 other examples about classes
 
-  calcAge() {
-    console.log(2021 - this.year);
-  }
-
-  greet() {
-    console.log(`Hello ${this.name}`);
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
   }
 }
 
-class Student extends Person {
-  constructor(name, year, course) {
-    super(name, year);
-    this.course = course;
-  }
-}
-const mike = new Student('Mike', 1986, 'Node.js');
-console.log(mike);
-mike.greet();
-console.log(mike.__proto__);
-console.log(mike.__proto__.__proto__);
+const acc1 = new Account('Mike', 'USD', 123123);
+console.log(acc1);
 
 //=========================== 🔴 coding challenge ===================
 /*
